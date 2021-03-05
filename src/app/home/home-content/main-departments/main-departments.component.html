@@ -1,0 +1,29 @@
+<button type="button"  class="btn btn-primary " routerLink="/add-dept/">إضافة قسم </button>
+
+<div class="row" style="margin-top: 24px;">
+  <div class="col" >
+      <h2 style="margin-left: 20%;">الاقسام الرئيسية</h2>
+      <table class="table table-bordered" style="width:90%;">
+     <thead>
+      <tr>
+        <th></th>
+        <th>اسم القسم</th>
+        <th>صورة القسم</th>
+        <th >خيارات</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dept of departments ; let i = index">
+        <th>{{i+1}}</th>
+        <td>{{dept.titleAr}}</td>
+        <td><img [src]="dept.imageUrl" class="thumbnail" ></td>
+        <td>
+          <a class="option" routerLink="/add-dept/" [queryParams]="{id:dept.key}">تعديل </a>
+            |  
+           <a (click)="delete(dept.key)" class="text-danger option">حذف</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  </div>

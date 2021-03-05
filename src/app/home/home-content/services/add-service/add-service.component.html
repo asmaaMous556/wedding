@@ -1,0 +1,51 @@
+
+<form [formGroup]="serviceForm" (ngSubmit)="addService(serviceForm.value)">
+
+  <div class="form-group col-md-6">
+    <label class="control-label"><span class="required">*</span> اسم الخدمة (باللغة العربية) </label>
+    <input type="text" class="form-control" formControlName="titleAr" required>
+    <div *ngIf="serviceForm.get('titleAr').touched && serviceForm.get('titleAr').errors?.required" class="text-danger">
+      بيان مطلوب
+   </div>
+  </div>
+
+  <div class="form-group col-md-6">
+    <label class="control-label">  اسم الخدمة (باللغة الإنجليزية)</label>
+    <input type="text" class="form-control" formControlName="titleEn">
+  </div>
+ <div class="form-group col-md-6">
+     <label class="control-label"><span class="required">*</span> اختر القسم </label>
+     <select multiple class="form-control" formControlName="departmentsKey" required>
+        <option *ngFor="let dept of departments" [value]="dept.key" class=""> {{dept.titleAr}}</option>
+     </select>
+     <div *ngIf="serviceForm.get('departmentsKey').touched && serviceForm.get('departmentsKey').errors?.required" class="text-danger">
+      بيان مطلوب
+    </div>
+  </div>
+
+  <div class="col-md-6" *ngIf="isLink ; else noLink">
+    <label class="control-label"><span class="required">*</span>صورة الخدمة </label>
+     <p>
+      <a (click)="previewImg()" class="stretched-link"> عرض الصورة</a> 
+         | 
+      <a class="stretched-link text-danger" (click)="deleteImg()">حذف</a>
+     </p>
+  </div>
+
+
+<ng-template #noLink>
+  <div class="form-group col-md-6" >
+    <label class="control-label"> <span class="required">*</span>صورة الخدمة </label>
+    <input type="file" class="form-control-file" (change)="onFileSelected($event)" formControlName="imageUrl" required>
+    <div *ngIf="serviceForm.get('imageUrl').touched && serviceForm.get('imageUrl').errors?.required" class="text-danger">
+      بيان مطلوب
+    </div>
+  </div>
+</ng-template>
+  <div class="footer" style="width:70%;">
+  <hr/>
+  <button type="submit"  [disabled]="serviceForm.invalid" class="btn btn-primary" > حفظ </button>
+  </div>
+  </form>
+
+

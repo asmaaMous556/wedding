@@ -1,0 +1,27 @@
+.section-btn{
+    background-color: #757370;
+    border-color: #757370;
+    box-shadow: none;
+    color:#fff;
+    margin-top: 20px;
+    margin-left: 700px;
+    font-size: 20px;
+}
+form{
+    width: 80%;
+    margin-top: 20px;
+    margin-right: 20px;
+    text-align: start;
+}
+
+.control-label.required::before{
+    color: #d00;
+    content: "*";
+}
+.stretched-link{
+    font-size: 14px;
+}
+
+.btn-primary{
+    margin-right: 90%;
+}

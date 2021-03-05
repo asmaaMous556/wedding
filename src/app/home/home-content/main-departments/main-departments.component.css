@@ -1,0 +1,18 @@
+.img{
+    margin-top:60px;
+
+}
+
+.thumbnail{
+    height: 80px;
+    border-radius: 100%;
+    width: 120px;
+    background-size: cover; 
+}
+.option{
+    font-size:14px;
+}
+.btn-primary{
+    margin-left: 85%;
+    margin-top: 20px;
+}

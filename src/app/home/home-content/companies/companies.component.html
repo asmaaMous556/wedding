@@ -1,0 +1,29 @@
+<button type="button"  class="btn btn-primary " routerLink="/add-company/"> إضافة شركة </button>
+<div class="row" style="margin-top: 24px;">
+  <div class="col-9">
+      <h2>الشركات</h2>
+         <table class="table table-bordered" style="width:120%">
+            <thead>
+              <tr>
+                <th></th>
+                <th>اسم الشركة باللغة العربية </th>
+                <th> العنوان</th>
+                 <th>صورة الشركة</th>
+                 <th style="width:30%">خيارات </th>
+              </tr>
+            </thead>
+           <tbody>
+             <tr *ngFor="let company of companies ; let i = index  ">
+               <th>{{i+1}}</th>
+                <td>{{company.titleAr}}</td>
+                 <td>{{company.address}}</td>
+                <td><img [src]="company.imageUrl" class="thumbnail" ></td>
+                <td><a class="option" routerLink="/add-company/" [queryParams]="{id:company.key}">تعديل</a>
+                    | 
+                     <a (click)="delete(company.key)" class="text-danger option">حذف</a>
+                 </td>
+             </tr>
+            </tbody>
+          </table>
+    </div>
+ </div>

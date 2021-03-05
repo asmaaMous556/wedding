@@ -1,0 +1,31 @@
+.section-btn{
+    background-color: #757370;
+    border-color: #757370;
+    box-shadow: none;
+    color:#fff;
+    margin-left: 700px;
+    font-size: 20px;
+}
+
+.required{
+    color:red;
+}
+.thumbnail{
+    border-radius: 100%;
+    width: 120px;
+    background-size: cover; 
+}
+.table{
+    margin-right: 10px;
+    width:90%;
+}
+
+.option{
+    font-size:14px;
+}
+.btn-primary{
+    margin-left: 85%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}

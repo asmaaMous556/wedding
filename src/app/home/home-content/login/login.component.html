@@ -1,0 +1,23 @@
+
+<div class="container login-container">
+    <div class="alert alert-ganger" *ngIf="errorMess" >{{errorMess}}</div>
+    <div class="row">
+        <div class="col-md-6 login-form-1">
+            <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+                <div class="form-group">
+                    <input  type="email" class="form-control required" formControlName="email" placeholder="البريد الالكتروني" required />
+                  <div><small *ngIf="email.touched && email.invalid" class="text-danger">ادخل البريد الالكتروني  </small></div>  
+                  <div><small *ngIf="email.errors?.pattern && email.errors.dirty" class="text-danger"> ادخل البريد الالكتروني الصحيح</small></div> 
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-control required" formControlName="password" placeholder="كلمة السر" required />
+                    <small *ngIf="password.touched && password.invalid " class="text-danger">ادخل كلمة السر  </small>
+                </div>
+
+               <button type="submit" [disabled]="loginForm.invalid" class="btnSubmit"> Login</button>
+                   
+            </form>
+        </div>
+    </div>
+</div>

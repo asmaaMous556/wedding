@@ -1,0 +1,27 @@
+
+<button type="button"  class="btn btn-primary " routerLink="/add-service/"> إضافة خدمة </button>
+
+<div class="row">
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th></th>
+        <th>اسم الخدمة </th>
+        <th>الصورة</th>
+        <th style="width:30%">خيارات </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let service of services; let i = index">
+        <th>{{i+1}}</th>
+        <td>{{service.titleAr}}</td>
+        <td><img [src]="service.imageUrl" class="thumbnail" ></td>
+        <td><a class="option" routerLink="/add-service/" [queryParams]="{id:service.key}">تعديل</a>
+           | 
+          <a (click)="delete(service.key)" class="text-danger option"> حذف </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
