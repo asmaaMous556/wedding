@@ -1,11 +1,12 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
- 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="btn btn-primary" (click)="toggleMenu()" id="menu-toggle">☰  Menu</button>
+  
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  
+  <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" routerLink ="/"> الصفحة الرئيسية</a>
@@ -20,13 +21,14 @@
       </li>
       <ng-template #anonymousUser>
         <li class="nav-item">
-           <button class="btn btn-primary" id="menu-toggle" routerLink="/login"> تسجيل الدخول</button>
+           <a class="nav-link" id="menu-toggle" routerLink="/login"> تسجيل الدخول</a>
        </li>
      </ng-template>
     </ul>
-  </div>
+    </div>
 </nav>
 
+<!-- <app-side-navbar [show]="show"></app-side-navbar> -->
 
 
 
@@ -53,31 +55,4 @@
 
 
 
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink ="/">Home</a>
-        </li>
-        <ng-template #notUser>
-          <li class="nav-item">
-            <button calss="btn btn-primary" routerLink="/login">تسجيل الدخول</button>
-          </li>
-        </ng-template>
-        <li class="nav-item dropdown" *ngIf="isUser ; else notUser ">
-          <a class="nav-link dropdown-toggle"   id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           {{email}}</a>
 
-          <div class="dropdown-menu"  aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" (click)="logout()">تسجيل الخروج</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav> -->

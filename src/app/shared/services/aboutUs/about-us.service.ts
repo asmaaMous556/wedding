@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AboutUsService {
-
+show:boolean= false;
   constructor(private db :AngularFireDatabase) { }
 
 
