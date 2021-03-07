@@ -13,7 +13,7 @@
 .thumbnail{
     border-radius: 100%;
     width: 120px;
-    background-size: cover; 
+    object-fit: cover;
 }
 .table{
     margin-right: 10px;

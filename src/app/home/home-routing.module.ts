@@ -1,3 +1,6 @@
+import { ComplainsComponent } from './home-content/complains/complains.component';
+import { AboutUsComponent } from './home-content/about-us/about-us.component';
+import { ContactUsComponent } from './home-content/contact-us/contact-us.component';
 import { AddItemComponent } from './home-content/item/add-item/add-item.component';
 import { ItemComponent } from './home-content/item/item.component';
 import { AddCompanyComponent } from './home-content/companies/add-company/add-company.component';
@@ -25,7 +28,10 @@ const routes: Routes = [
     {path:'companies',component:CompaniesComponent},
     {path:'add-company',component:AddCompanyComponent},
     {path:'items', component:ItemComponent},
-    {path:'add-item',component:AddItemComponent}
+    {path:'add-item',component:AddItemComponent},
+    {path:'contactUs',component:ContactUsComponent},
+    {path:'aboutUs',component:AboutUsComponent},
+    {path:'complains',component:ComplainsComponent}
     
   ]
  

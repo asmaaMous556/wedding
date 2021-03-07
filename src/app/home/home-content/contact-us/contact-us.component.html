@@ -1,0 +1,66 @@
+
+<div class="row">
+    <form [formGroup]="contactUsForm" (ngSubmit)=" updateLinks(contactUsForm.value)">
+        <div class="form-row">
+
+            <div class="form-group col-md-6">
+              <label class="control-label required">Email</label>
+              <input type="text" class="form-control" formControlName="email" required>
+               <div *ngIf="contactUsForm.get('email').touched &&contactUsForm.get('email').errors?.required" class="text-danger">
+             بيان مطلوب
+              </div>
+            </div>
+
+       <div class="form-group col-md-6">
+         <label class="control-label required"> Facebook Link </label>
+         <input type="text" class="form-control" formControlName="facebook" required>
+          <div *ngIf="contactUsForm.get('facebook').touched &&contactUsForm.get('facebook').errors?.required" class="text-danger">
+        بيان مطلوب
+         </div>
+       </div>
+     
+       <div class="form-group col-md-6">
+         <label class="control-label"> Instagram Link </label>
+         <input type="text" class="form-control" formControlName="instagram" required>
+         <div *ngIf="contactUsForm.get('instagram').touched &&contactUsForm.get('instagram').errors?.required" class="text-danger">
+            بيان مطلوب
+          </div>
+       </div>
+      
+       <div class="form-group col-md-6">
+         <label class="control-label required"> Twitter Link</label>
+         <input type="text" class="form-control" formControlName="twitter" required>
+         <div *ngIf="contactUsForm.get('twitter').touched && contactUsForm.get('twitter').errors?.required" class="text-danger">
+            بيان مطلوب
+         </div>
+       </div>
+
+       <div class="form-group col-md-6">
+         <label class="control-label required">  Phone Number </label>
+         <input type="text" class="form-control" formControlName="phoneNumber" required>
+         <div *ngIf="contactUsForm.get('phoneNumber').touched && contactUsForm.get('phoneNumber').errors?.required" class="text-danger">
+            بيان مطلوب
+         </div>
+       </div>
+
+       <div class="form-group col-md-6">
+         <label class="control-label required">WhatsApp </label>
+         <input type="text-area" class="form-control" formControlName="whatsapp" required>
+         <div *ngIf="contactUsForm.get('whatsapp').touched && contactUsForm.get('whatsapp').errors?.required" class="text-danger">
+            بيان مطلوب
+         </div>
+       </div>
+
+       <div class="form-group col-md-6">
+        <label class="control-label required">Snapchat Link</label>
+        <input type="text-area" class="form-control" formControlName="snapchat" required>
+        <div *ngIf="contactUsForm.get('snapchat').touched &&contactUsForm.get('snapchat').errors?.required" class="text-danger">
+           بيان مطلوب
+        </div>
+      </div> 
+
+   </div>
+    <hr/>
+       <button type="submit" [disabled]="!contactUsForm.valid" class="btn btn-primary"> تحديث</button>
+     </form>
+ </div>

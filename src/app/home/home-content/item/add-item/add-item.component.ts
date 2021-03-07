@@ -6,8 +6,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { company } from './../../../../shared/models/companies';
 import { CompaniesService } from './../../../../shared/services/company/companies.service';
 import { Component, OnInit } from '@angular/core';
-// import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+
 import { finalize } from 'rxjs/operators';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
 
 @Component({
   selector: 'app-add-item',
@@ -44,11 +46,11 @@ export class AddItemComponent implements OnInit {
         }
       })
       
-    })
+    });
     this.itemForm=this.fb.group({
    titleAr: ['',[Validators.required]],
-   titleEn:['',[]],
-   imageUrl:['',[Validators.required]],
+   titleEn:[''],
+   imageUrl:[''],
    companyKey:['',[Validators.required]],
    price:['',[Validators.required]],
    info:['',[Validators.required]]
@@ -59,19 +61,18 @@ export class AddItemComponent implements OnInit {
   if(this.itemKey){
     this.ItemService.getItemById(this.itemKey).subscribe(item=>{
       this.item=item.payload.val(); 
-      console.log(this.item);
       this.itemForm.patchValue({
         titleAr:this.item.titleAr,
         titleEn:this.item.titleEn,
         info: this.item.info,
         price:this.item.price,
-       // imageUrl:this.item.imageUrl,
+        companyKey:this.item.companyKey
         
       })
       if(this.item.imageUrl)
       {
        this.link=this.item.imageUrl
-       console.log(this.link);
+      
           if(this.link){
              this.isLink =true;
            }
@@ -80,34 +81,40 @@ export class AddItemComponent implements OnInit {
   }
 }
 
-  onFileSelected(event){
-    var  date= Date.now()
-     const file = event.target.files[0];
-     const filePath = `/itemsImages/${date}`;
-     const fileRef = this.storage.ref(filePath);
-     const task = this.storage.upload(`/itemsImages/${date}`, file);
-      task.snapshotChanges().pipe(
-       finalize(() => {
-         this.downloadUrl = fileRef.getDownloadURL();
-         this.downloadUrl.subscribe(url => {
-           if (url) {
-             this.link = url;
-           }
-         });
-       }))
-     
-    }   
-    addItem(item){
-      item.imageUrl=this.link;
-      if(this.itemKey){
-        this.ItemService.updateItem(item,this.itemKey);
-      }
-      else{
-        this.ItemService.addItem(item);
-      }
-    this.itemForm.reset();
-    }
- deleteImg(){
+addItem(item){
+  item.imageUrl=this.link;
+ console.log(this.link);
+  if(this.itemKey){
+    this.ItemService.updateItem(item,this.itemKey);
+  }
+  else{
+    this.ItemService.addItem(item);
+  }
+  this.itemForm.reset();
+}
 
- }
+
+  onFileSelected(event){
+    var n=Date.now();
+    const file = event.target.files[0]
+    const filePath = `/itemsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`/itemsImages/${n}`, file);
+     task.snapshotChanges().pipe(
+      finalize(() => {
+        this.downloadUrl = fileRef.getDownloadURL();
+        this.downloadUrl.subscribe(url => {
+          if (url) {
+            this.link = url;
+           console.log(this.link);
+          }
+        });
+      })
+    )
+    .subscribe(url => {
+      if (url) {
+      }
+    });
+    }   
+   
 }

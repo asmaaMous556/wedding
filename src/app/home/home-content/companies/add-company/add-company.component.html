@@ -2,6 +2,7 @@
 <div class="row">
     <form [formGroup]="companyForm" (ngSubmit)="addCompany(companyForm.value)">
       <div class="form-row">
+
        <div class="form-group col-md-6">
          <label class="control-label required"> اسم الشركة (باللغة العربية) </label>
          <input type="text" class="form-control" formControlName="titleAr" required>
@@ -31,7 +32,7 @@
        </div>
        <div class="form-group col-md-6">
          <label class="control-label required">  العنوان</label>
-         <input placeholder=" العنوان" type="text" class="form-control" formControlName="address" required>
+         <textarea placeholder=" العنوان" type="text-area" class="form-control" formControlName="address" required></textarea>
          <div *ngIf="companyForm.get('address').touched &&companyForm.get('address').errors?.required" class="text-danger">
            بيان مطلوب
          </div>
@@ -39,19 +40,23 @@
      
       <div class="form-group col-md-6">
           <label class="control-label required"> اختر الخدمات </label>
-          <select multiple data-live-search="true" class="form-control select" formControlName="services" required>
-             <option></option>
-             <option *ngFor="let service of services" [value]="service.key" >{{service.titleAr}}</option> 
-          </select>
+          <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="services" formControlName="services">
+          </ng-multiselect-dropdown>
+       
           <div *ngIf="companyForm.get('services').touched &&companyForm.get('services').errors?.required" class="text-danger">
             بيان مطلوب
           </div>
       </div>
      
        <div class="form-group col-md-6">
-         <label class="control-label required"> صورة الشركة </label>
-         <input type="file" class="form-control-file" (change)="onFileSelected($event)" formControlName="imageUrl" required>
-         <img [src]="link" style="height: 50px;"  *ngIf="link">
+         <label class="control-label required">صورة الشركة</label>
+         <br>
+         <ng-container *ngIf="link">
+         <a [href]="link"  target="_blank"> عرض الصورة </a> 
+         |  
+         <label class="control-label">  اختيار صورة جديدة</label>
+        </ng-container>
+          <input type="file" class="form-control-file" (change)="onFileSelected($event)" formControlName="imageUrl">
        </div>
       
     </div>

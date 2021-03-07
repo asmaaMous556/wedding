@@ -16,7 +16,11 @@ import { SideNavbarComponent } from './home-layout/side-navbar/side-navbar.compo
 import { AddCompanyComponent } from './home-content/companies/add-company/add-company.component';
 import { AddServiceComponent } from './home-content/services/add-service/add-service.component';
 import { ItemComponent } from './home-content/item/item.component';
-import { AddItemComponent } from './home-content/item/add-item/add-item.component'
+import { AddItemComponent } from './home-content/item/add-item/add-item.component';
+import { ContactUsComponent } from './home-content/contact-us/contact-us.component';
+import { AboutUsComponent } from './home-content/about-us/about-us.component';
+import { ComplainsComponent } from './home-content/complains/complains.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [HomeContentComponent,
@@ -31,12 +35,16 @@ import { AddItemComponent } from './home-content/item/add-item/add-item.componen
          AddCompanyComponent,
            AddServiceComponent,
            ItemComponent,
-           AddItemComponent],
+           AddItemComponent,
+           ContactUsComponent,
+           AboutUsComponent,
+           ComplainsComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
     NzModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgMultiSelectDropDownModule.forRoot()
    
   ]
 })

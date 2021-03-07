@@ -14,29 +14,23 @@
   </div>
 
   
-<ng-template #noLink>
   <div class="form-group col-md-6">
-   <label class="control-label"> <span class="required">*</span>صورة القسم</label>
-      <input type="file" class="form-control-file" (change)="onFileSelected($event)"
-      formControlName="imageUrl" />
-    <div *ngIf="deptForm.get('imageUrl').touched && deptForm.get('imageUrl').errors?.required" class="text-danger">
-      بيان مطلوب
-    </div>
-   </div>
-  </ng-template>
-  <div class="col-md-6" *ngIf=" isLink ; else noLink">
-    <label class="control-label "><span class= "required">*</span>صورة القسم</label>
-     <p>
-      <a [href]="link" role="button" class="stretched-link"> عرض الصورة</a> 
-         | 
-      <a class="stretched-link text-danger" (click)="deleteImg()">حذف</a>
-     </p>
+    <label class="control-label"><span class="required">*</span>  صورة القسم  </label>
+    <br>
+    <ng-container *ngIf="link ; else noLink">
+    <a [href]="link" target="_blank"> عرض الصورة </a> 
+    | 
+    <label class="control-label">  اختيار صورة جديدة</label>
+    <input type="file" class="form-control-file" (change)="onFileSelected($event)" formControlName="imageUrl" >
+  </ng-container>
+    <ng-template #noLink>
+     <input type="file" class="form-control-file" (change)="onFileSelected($event)" formControlName="imageUrl">
+    </ng-template>
   </div>
 
    <div class="footer" style="width:70% ;">
    <hr/>
   <button type="submit"  [disabled]="deptForm.invalid" class="btn btn-primary" >حفظ </button>
-  <!--  -->
   </div>
  </form>
 

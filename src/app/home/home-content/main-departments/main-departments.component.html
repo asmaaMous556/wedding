@@ -1,4 +1,4 @@
-<button type="button"  class="btn btn-primary " routerLink="/add-dept/">إضافة قسم </button>
+
 
 <div class="row" style="margin-top: 24px;">
   <div class="col" >
@@ -19,8 +19,6 @@
         <td><img [src]="dept.imageUrl" class="thumbnail" ></td>
         <td>
           <a class="option" routerLink="/add-dept/" [queryParams]="{id:dept.key}">تعديل </a>
-            |  
-           <a (click)="delete(dept.key)" class="text-danger option">حذف</a>
         </td>
       </tr>
     </tbody>

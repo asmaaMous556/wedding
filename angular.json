@@ -27,16 +27,21 @@
               "src/custom-theme.scss",
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/bootstrap-select/dist/css/bootstrap-select.css",
+              "node_modules/bootstrap-select/dist/css/bootstrap-select.min.css",
               "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",  
-              "node_modules/bootstrap-select/dist/css/bootstrap-select.css",
-              "node_modules/bootstrap-select/dist/css/bootstrap-select.min.css"
+              "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
+              "node_modules/angular-bootstrap-md/assets/scss/mdb.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
+              "node_modules/@popperjs/core/dist/umd/popper.js",
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
                "node_modules/bootstrap/dist/js/bootstrap.js",
                "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
                "node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"
+              
               
             ]
           },

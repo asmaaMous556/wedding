@@ -1,0 +1,14 @@
+form{
+    width: 80%;
+    margin-top: 20px;
+    margin-right: 20px;
+    text-align: start;
+}
+.btn-primary{
+    margin-right: 85%;
+}
+
+.control-label.required::before{
+    color: #d00;
+    content: "*";
+}

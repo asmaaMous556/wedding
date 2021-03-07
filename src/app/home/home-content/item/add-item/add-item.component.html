@@ -39,28 +39,20 @@
          بيان مطلوب
        </div>
     </div>
-<ng-template #noLink>
     <div class="form-group col-md-6">
-      <label class="control-label"> <span class="required">*</span>صورة المنتج</label>
-         <input type="file" class="form-control-file" (change)="onFileSelected($event)"
-         formControlName="imageUrl" required />
-       <div *ngIf="itemForm.get('imageUrl').touched && itemForm.get('imageUrl').errors?.required" class="text-danger">
-         بيان مطلوب
-       </div>
-       </div>
-      </ng-template>
-      <div class="col-md-6" *ngIf=" isLink ; else noLink">
-        <label class="control-label"> صورة المنتج </label>
-         <p>
-          <a [href]="link" class="stretched-link"> عرض الصورة</a> 
-             | 
-          <a class="stretched-link text-danger" (click)="deleteImg()">حذف</a>
-         </p>
-      </div>
-
-       <hr/>
-       
+      <label class="control-label"><span class="required">*</span>  صورة المنتج </label>
+      <br>
+      <ng-container *ngIf="link">
+      <a [href]="link" target="_blank"> عرض الصورة </a> 
+      |  
+      <label class="control-label">اختيار صورة جديدة</label>
+    </ng-container>
+       <input type="file" class="form-control-file" (change)="onFileSelected($event)" formControlName="imageUrl">
+    </div>
+    <div class="footer" style="width:70% ;">
+    <hr/>
     <button type="submit" [disabled]="itemForm.invalid"  class="btn btn-primary" >حفظ </button>
     </div>
+  </div>
    </form>
   </div>

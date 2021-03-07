@@ -7,6 +7,7 @@ import { CompaniesService } from 'src/app/shared/services/company/companies.serv
 import { ServicesService } from 'src/app/shared/services/services/services.service';
 import { finalize } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-add-company',
@@ -22,6 +23,7 @@ export class AddCompanyComponent implements OnInit {
   company:any;
   link:string='';
   isLink:boolean=false;
+  dropdownSettings:IDropdownSettings={};
   constructor(private fb:FormBuilder ,
     private service:ServicesService,
     private companyService:CompaniesService,
@@ -34,11 +36,19 @@ export class AddCompanyComponent implements OnInit {
       titleEn:[''], 
       description:['',[Validators.required]],
       phoneNum:['',Validators.required],
-      imageUrl:['',Validators.required],
+      imageUrl:[''],
       address:['',Validators.required],
       coverImageUrl:[''],
       services: ['',Validators.required]
-    })
+    });
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'key',
+      textField: 'titleAr',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      allowSearchFilter: true
+    };
 
    this.service.getServices().subscribe(services=>{
      this.services=services.map(service=>{
@@ -65,7 +75,7 @@ export class AddCompanyComponent implements OnInit {
          description: this.company.description,
          phoneNum:this.company.phoneNum,
          address:this.company.address,
-         services:this.company.services
+         services:this.company.services,
        })
     if(this.company.imageUrl)
     {
@@ -81,9 +91,9 @@ export class AddCompanyComponent implements OnInit {
   }
 
   addCompany(company:company)
-  {
-    
+  { 
   company.imageUrl=this.link;
+  console.log(this.link);
     if(this.compKey){
       this.companyService.updateCompany(this.compKey,company)
       }

@@ -23,7 +23,7 @@ export class ItemService {
   }
 
   deleteItem(key){
-    return this.db.object('/items/'+key).remove;
+   return this.db.object('/items/'+ key).remove();
   }
 
   updateItem(item:item,key:string){

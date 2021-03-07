@@ -49,7 +49,6 @@ isLink:boolean=false;
           if(this.dept.imageUrl)
           {
            this.link=this.dept.imageUrl
-           console.log(this.link);
               if(this.link){
                  this.isLink =true;
                }
@@ -69,34 +68,31 @@ isLink:boolean=false;
     else{
       this.deptService.addDepartment(department);
     }
-     
+    this.deptForm.reset();
     
   }
 
- onFileSelected(event){
- var  date= Date.now()
-  const file = event.target.files[0];
-  const filePath = `/departmentsImages/${date}`;
-  const fileRef = this.storage.ref(filePath);
-  const task = this.storage.upload(`/departmentsImages/${date}`, file);
-   task.snapshotChanges().pipe(
-    finalize(() => {
-      this.downloadUrl = fileRef.getDownloadURL();
-      this.downloadUrl.subscribe(url => {
-        if (url) {
-          this.link = url;
-        }
-        
-      });
-    }))
- }
- previewImg(){
-  
- }
-
-
- deleteImg(){
-
- }
+  onFileSelected(event){
+    var  date= Date.now()
+     const file = event.target.files[0];
+     const filePath = `/deptsImages/${date}`;
+     const fileRef = this.storage.ref(filePath);
+     const task = this.storage.upload(`/deptsImages/${date}`, file);
+      task.snapshotChanges().pipe(
+       finalize(() => {
+         this.downloadUrl = fileRef.getDownloadURL();
+         this.downloadUrl.subscribe(url => {
+           if (url) {
+             this.link = url;
+           }
+           
+         });
+       })
+     )
+     .subscribe(url => {
+       if (url) {
+       }
+     });
+}
 
 }

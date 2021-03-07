@@ -1,5 +1,6 @@
-import { environment } from './../environments/environment.prod';
+import { SelectModule } from 'ng-uikit-pro-standard';
 
+import { environment } from './../environments/environment.prod';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,9 +13,12 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import{AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireStorageModule} from '@angular/fire/storage';
-import { ComponentLoaderFactory } from 'ngx-bootstrap/component-loader';
-import { positionService } from '@ng-bootstrap/ng-bootstrap/util/positioning';
+import { ComponentLoaderFactory } from 'ngx-bootstrap/component-loader'; 
 import { PositioningService } from 'ngx-bootstrap/positioning';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
+
+
 
 
 
@@ -22,6 +26,7 @@ import { PositioningService } from 'ngx-bootstrap/positioning';
 @NgModule({
   declarations: [
     AppComponent,
+    
 
   
   ],
@@ -36,6 +41,8 @@ import { PositioningService } from 'ngx-bootstrap/positioning';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
+    MDBBootstrapModule.forRoot(),
+    
     AngularFireModule.initializeApp(environment.firebaseConfig),
     
     

@@ -33,7 +33,8 @@ items:item[];
 
   
   delete(key){
-  if(!confirm('حذف المنتج؟')) return ;
+ 
+    if(!confirm('حذف الشركة؟')) return ;
     {
       this.itemService.deleteItem(key);
     }

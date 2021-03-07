@@ -1,0 +1,24 @@
+
+<div class="row" style="margin-top: 24px;">
+  <div class="col-9">
+      <h2>الشكاوى </h2>
+         <table class="table table-bordered" style="width:120%">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th> اسم المستخدم  </th>
+                <th> البريد الالكتروني </th>
+                 <th>الشكوى</th>
+              </tr>
+            </thead>
+           <tbody>
+             <tr *ngFor="let complain of complains ; let i = index">
+               <th>{{i+1}}</th>
+                <td>{{complain.name}}</td>
+                 <td>{{complain.email}}</td>
+                 <td>{{complain.message}}</td>
+             </tr>
+            </tbody>
+          </table>
+    </div>
+ </div>

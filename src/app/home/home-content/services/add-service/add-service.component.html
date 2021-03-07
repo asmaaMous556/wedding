@@ -15,33 +15,27 @@
   </div>
  <div class="form-group col-md-6">
      <label class="control-label"><span class="required">*</span> اختر القسم </label>
-     <select multiple class="form-control" formControlName="departmentsKey" required>
+     <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="departments" formControlName="departmentsKey">
+    </ng-multiselect-dropdown>
+     <!-- <select multiple="multiple" class="form-control" formControlName="departmentsKey" required>
         <option *ngFor="let dept of departments" [value]="dept.key" class=""> {{dept.titleAr}}</option>
-     </select>
+     </select> -->
      <div *ngIf="serviceForm.get('departmentsKey').touched && serviceForm.get('departmentsKey').errors?.required" class="text-danger">
       بيان مطلوب
     </div>
   </div>
 
-  <div class="col-md-6" *ngIf="isLink ; else noLink">
-    <label class="control-label"><span class="required">*</span>صورة الخدمة </label>
-     <p>
-      <a (click)="previewImg()" class="stretched-link"> عرض الصورة</a> 
-         | 
-      <a class="stretched-link text-danger" (click)="deleteImg()">حذف</a>
-     </p>
+  <div class="form-group col-md-6">
+    <label class="control-label "><span class="required">*</span> صورة الخدمة  </label>
+    <br>
+    <ng-container *ngIf="link">
+    <a [href]="link"  target="_blank"> عرض الصورة </a> 
+    |  
+    <label class="control-label">  اختيار صورة جديدة</label>
+  </ng-container>
+     <input type="file" class="form-control-file" (change)="onFileSelected($event)" formControlName="imageUrl">
   </div>
 
-
-<ng-template #noLink>
-  <div class="form-group col-md-6" >
-    <label class="control-label"> <span class="required">*</span>صورة الخدمة </label>
-    <input type="file" class="form-control-file" (change)="onFileSelected($event)" formControlName="imageUrl" required>
-    <div *ngIf="serviceForm.get('imageUrl').touched && serviceForm.get('imageUrl').errors?.required" class="text-danger">
-      بيان مطلوب
-    </div>
-  </div>
-</ng-template>
   <div class="footer" style="width:70%;">
   <hr/>
   <button type="submit"  [disabled]="serviceForm.invalid" class="btn btn-primary" > حفظ </button>

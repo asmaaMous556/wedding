@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { department } from 'src/app/shared/models/departments';
 import { DepartmentsService } from 'src/app/shared/services/departments/departments.service';
 import { ServicesService } from 'src/app/shared/services/services/services.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-add-service',
@@ -21,19 +22,27 @@ export class AddServiceComponent implements OnInit {
   link:string;
   downloadUrl:any;
   isLink:boolean=false;
+  dropdownSettings:IDropdownSettings={};
   constructor(private fb:FormBuilder,
     private deptService:DepartmentsService,
     private serviceService:ServicesService,
-    private route:ActivatedRoute, private storage :AngularFireStorage
-    ) { }
+    private route:ActivatedRoute, private storage :AngularFireStorage) { }
 
   ngOnInit(): void {
     this.serviceForm=this.fb.group({
       titleAr:['',[Validators.required]],
       titleEn:[''],
-      imageUrl:['',[Validators.required]],
+      imageUrl:[''],
       departmentsKey:['',[Validators.required]],
-         })
+         });
+         this.dropdownSettings = {
+          singleSelection: false,
+          idField: 'key',
+          textField: 'titleAr',
+          selectAllText: 'Select All',
+          unSelectAllText: 'UnSelect All',
+          allowSearchFilter: true
+        };
 
    this.deptService.getDepartment().subscribe(departments=>{
     this.departments=departments.map(department=>{
@@ -70,8 +79,8 @@ export class AddServiceComponent implements OnInit {
   
 }
   
-  addService(service:service){
-    service.imageUrl=this.link;
+ async addService(service:service){
+     await (service.imageUrl=this.link);
     console.log(this.link)
     if(this.serviceKey){
       this.serviceService.updateService(this.serviceKey,service)
@@ -79,6 +88,7 @@ export class AddServiceComponent implements OnInit {
     else{
       this.serviceService.addService(service);
     }
+    this.serviceForm.reset();
    
   }
 
@@ -105,13 +115,6 @@ export class AddServiceComponent implements OnInit {
        if (url) {
        }
      });
-}
-
-previewImg(){
-  location.href=this.link;
-}
-deleteImg(){
-
 }
 
 

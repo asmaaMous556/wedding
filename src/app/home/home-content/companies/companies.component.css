@@ -2,7 +2,7 @@
     height: 80px;
     border-radius: 100%;
     width: 120px;
-    background-size: cover; 
+    object-fit: cover;
 }
 .option{
     font-size:14px;

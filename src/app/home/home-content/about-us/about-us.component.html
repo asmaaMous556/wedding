@@ -1,0 +1,18 @@
+
+<div class="row">
+    <form [formGroup]="aboutUsForm" (ngSubmit)="setText(aboutUsForm.value)">
+      <div class="form-row">
+       <div class="form-group col-md-6">
+         <label class="control-label required"> عنا</label>
+         <textarea placeholder=" تعريف عن الشركة " cols="10"  rows="8" type="text-area" class="form-control" formControlName="aboutUsText" required></textarea>
+         <div *ngIf="aboutUsForm.get('aboutUsText').touched &&aboutUsForm.get('aboutUsText').errors?.required" class="text-danger">
+           بيان مطلوب
+         </div>
+       </div>
+      
+    </div>
+    <hr/>
+       <button type="submit" [disabled]="!aboutUsForm.valid" class="btn btn-primary"> حفظ</button>
+     </form>
+    </div>
+
