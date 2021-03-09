@@ -7,9 +7,9 @@ import { Injectable } from '@angular/core';
 })
 export class CompaniesService {
 
-  constructor(private db:AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) { }
 
-  addCompany(company:company){
+  addCompany(company: company){
  return this.db.list('/companies/').push(company);
   }
 
@@ -17,14 +17,14 @@ export class CompaniesService {
     return this.db.list('/companies/').snapshotChanges();
   }
 
-  updateCompany(compId:string,company:company){
-    return this.db.object('/companies/'+compId).update(company);
+  updateCompany(compId: string, company: company){
+    return this.db.object('/companies/' + compId).update(company);
   }
 
-  deleteCom(compId:string){
-    return this.db.object('/companies/'+compId).remove();
+  deleteCom(compId: string){
+    return this.db.object('/companies/' + compId).remove();
   }
-  getCompById(id:string){
- return this.db.object('/companies/'+id).snapshotChanges()
+  getCompById(id: string){
+ return this.db.object('/companies/' + id).snapshotChanges();
   }
 }

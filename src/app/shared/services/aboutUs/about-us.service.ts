@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AboutUsService {
-show:boolean= false;
-  constructor(private db :AngularFireDatabase) { }
+show = false;
+  constructor(private db: AngularFireDatabase) { }
 
 
   getText(){
@@ -14,8 +14,8 @@ show:boolean= false;
 
   }
 
-  setText(text:string){
+  setText(text: string){
     return this.db.object<string>('/aboutUs/').set(text);
   }
-  
+
 }

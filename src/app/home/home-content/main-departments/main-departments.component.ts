@@ -8,26 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-departments.component.css']
 })
 export class MainDepartmentsComponent implements OnInit {
-departments:department[];
+departments: department[];
 
   constructor(private deptService: DepartmentsService) { }
   ngOnInit(): void {
-    this.deptService.getDepartment().subscribe(departments=>{
-      this.departments=departments.map(department=>{
+    this.deptService.getDepartment().subscribe(departments => {
+      this.departments = departments.map(department => {
         return {
-          key:department.key,
-          titleAr:department.payload.val()['titleAr'],
-          imageUrl:department.payload.val()['imageUrl']
-        }
-      })
-     })
-    
+          key: department.key,
+          titleAr: department.payload.val()['titleAr'],
+          titleEn:department.payload.val()['titleEn'],
+          imageUrl: department.payload.val()['imageUrl']
+        };
+      });
+     });
+
   }
   delete(key){
-    if(!confirm('حذف القسم؟')) return ;
+    if (!confirm('حذف القسم؟')) { return ; }
     {
-      this.deptService.deleteDept(key);  
-    
+      this.deptService.deleteDept(key);
+
     }
   }
 

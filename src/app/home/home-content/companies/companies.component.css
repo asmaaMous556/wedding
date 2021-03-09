@@ -10,4 +10,20 @@
 .btn-primary{
     margin-left: 85%;
     margin-top: 20px;
+    border-radius: 4px;
+}
+.card{
+    margin-top:70px;
+}
+
+.card-header{
+border:none;
+background-color: white;
+}
+.card-toolbar{
+    justify-content: center;
+}
+.table{
+    margin-left: 200px;
+    width:120%
 }

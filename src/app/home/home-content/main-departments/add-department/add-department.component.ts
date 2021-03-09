@@ -1,4 +1,5 @@
-import { ActivatedRoute } from '@angular/router';
+import { UploadingService } from './../../../../shared/services/uploading/uploading.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { DepartmentsService } from './../../../../shared/services/departments/departments.service';
 import { department } from './../../../../shared/models/departments';
@@ -22,21 +23,24 @@ link: string;
 deptId:string;
 dept:any;
 isLink:boolean=false;
+progress:number;
 
   constructor(private fb:FormBuilder,
       private deptService:DepartmentsService,
-      private storage :AngularFireStorage,
-      private route :ActivatedRoute) { }
+      private storage :UploadingService,
+      private route :ActivatedRoute,
+      private router : Router
+      ) { }
 
   ngOnInit(): void {
     this.deptForm = this.fb.group({
       titleAr :['',[Validators.required]],
       titleEn :['',[]],
       imageUrl:['',[Validators.required]],
-      
+
        });
        this.route.queryParams.subscribe(key=>{
-        this.deptId=key['id'];   
+        this.deptId=key.id;
       });
       if(this.deptId){
         this.deptService.getDeptById(this.deptId).subscribe(dept=>{
@@ -44,7 +48,6 @@ isLink:boolean=false;
           this.deptForm.patchValue({
             titleAr:this.dept.titleAr,
             titleEn:this.dept.titleEn,
-           // imageUrl:this.dept.imageUrl
           })
           if(this.dept.imageUrl)
           {
@@ -54,45 +57,46 @@ isLink:boolean=false;
                }
            }
         })
-       
+
       }
- 
+
   }
 
- 
-  addDepartment(department:department){
-    department.imageUrl=this.link
-    if(this.deptId){
+
+  async  addDepartment(department:department){
+   await(department.imageUrl=this.link)   
+     if(this.deptId){
       this.deptService.updateDept(this.deptId,department);
     }
     else{
       this.deptService.addDepartment(department);
     }
+   if(confirm('تم حفظ البيانات')){
     this.deptForm.reset();
-    
+    this.router.navigate['/departments']
+   }
+
   }
 
   onFileSelected(event){
-    var  date= Date.now()
-     const file = event.target.files[0];
-     const filePath = `/deptsImages/${date}`;
-     const fileRef = this.storage.ref(filePath);
-     const task = this.storage.upload(`/deptsImages/${date}`, file);
-      task.snapshotChanges().pipe(
-       finalize(() => {
-         this.downloadUrl = fileRef.getDownloadURL();
-         this.downloadUrl.subscribe(url => {
-           if (url) {
-             this.link = url;
-           }
-           
-         });
-       })
-     )
-     .subscribe(url => {
-       if (url) {
-       }
-     });
+    let n = Date.now();
+    const file = event.target.files[0];
+    const filePath = `/deptsImages/${n}`;
+    this.storage.getProgress(filePath,file).subscribe(progress=>{
+      this.progress=progress;
+    })
+    this.storage.uploadImg(filePath, file).pipe(
+      finalize(() => {
+         this.storage.fileRef(filePath).getDownloadURL()
+        .subscribe(url => {
+          if (url) {
+            this.link = url;
+            console.log(this.link)
+          }
+        });
+      })).subscribe(url=>{
+        if(url){}
+      })
 }
 
 }

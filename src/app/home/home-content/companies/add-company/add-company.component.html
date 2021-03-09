@@ -18,11 +18,19 @@
      
        <div class="form-group col-md-6">
          <label class="control-label required">  وصف الشركة</label>
-         <input type="text" class="form-control" formControlName="description" required>
-         <div *ngIf="companyForm.get('description').touched &&companyForm.get('description').errors?.required" class="text-danger">
+         <input type="text" class="form-control" formControlName="descriptionAr" required>
+         <div *ngIf="companyForm.get('descriptionAr').touched &&companyForm.get('descriptionAr').errors?.required" class="text-danger">
            بيان مطلوب
          </div>
        </div>
+       <div class="form-group col-md-6">
+        <label class="control-label required"> وصف الشركة باللغة الانجليزية</label>
+        <input type="text" class="form-control" formControlName="descriptionEn" required>
+        <div *ngIf="companyForm.get('descriptionEn').touched &&companyForm.get('descriptionEn').errors?.required" class="text-danger">
+          بيان مطلوب
+        </div>
+      </div>
+
        <div class="form-group col-md-6">
          <label class="control-label required">  رقم الهاتف</label>
          <input placeholder=" رقم الهاتف" type="text" class="form-control" formControlName="phoneNum" required>
@@ -51,26 +59,55 @@
        <div class="form-group col-md-6">
          <label class="control-label required">صورة الشركة</label>
          <br>
-         <ng-container *ngIf="link">
-         <a [href]="link"  target="_blank"> عرض الصورة </a> 
+         <div class="container" *ngIf="100 > imgProgress" style="margin-bottom: 10px;">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar"
+            [style.width.%]="imgProgress" ></div>
+          </div>
+        </div>
+
+         <ng-container *ngIf="imgLink">
+         <img [src]="imgLink" class="img" style="margin-bottom: 10px;">
+         <br>
          |  
-         <label class="control-label">  اختيار صورة جديدة</label>
+         <label class="control-label"> اختيار صورة جديدة</label>
         </ng-container>
-          <input type="file" class="form-control-file" (change)="onFileSelected($event)" formControlName="imageUrl">
+        <a>
+          <input type="file" class="form-control-file" 
+          (change)="onImageSelected($event)">
+        </a>
        </div>
+
+
+
+       <div class="form-group col-md-6">
+        <label class="control-label required">صورة الغلاف للشركة</label>
+        <br>
+
+        <div class="container" *ngIf="100 > coverProgress" style="margin-bottom: 10px;">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar"
+            [style.width.%]="coverProgress" ></div>
+          </div>
+        </div>
+        <ng-container *ngIf="coverLink" >
+        <img [src]="coverLink" class="img" style="margin-bottom: 10px;">
+        <br>
+        |  
+        <label class="control-label">  اختيار صورة جديدة</label>
+       </ng-container>
+       
+        <input type="file" class="form-control-file" (change)=" onCoverSelected($event)">
+       
+         
+      </div>
       
     </div>
     <hr/>
-       <button type="submit" [disabled]="!companyForm.valid" class="btn btn-primary"> حفظ</button>
-       <!--  -->
+       <button type="submit"
+        [disabled]="!companyForm.valid || !imgLink || !coverLink || 100>imgProgress || 100>coverProgress"
+         class="btn btn-primary"> حفظ</button>
+      
      </form>
     </div>
  
-    <!-- <div class="col-md-6" *ngIf=" isLink ; else noLink">
-      <label class="control-label required"> صورة الشركة </label>
-       <p>
-        <a href="{{link}}"> عرض الصورة</a> 
-           | 
-        <a class="stretched-link text-danger" (click)="deleteImg()">حذف</a>
-       </p>
-    </div> -->

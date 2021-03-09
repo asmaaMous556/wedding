@@ -11,19 +11,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
-  
-  errorMess:string='';
+
+
+  errorMess = '';
   loginForm: FormGroup;
-  constructor( private fb :FormBuilder,private auth:AuthService, private router:Router,
-     private userService:UserService) { }
+  constructor( private fb: FormBuilder, private auth: AuthService, private router: Router,
+               private userService: UserService) { }
 
   ngOnInit(): void {
-    this.loginForm=this.fb.group({
-      email:['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-      password:['',[Validators.required]]
-    })
-    
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      password: ['', [Validators.required]]
+    });
+
   }
 get email(){
   return this.loginForm.get('email');
@@ -33,10 +33,10 @@ get password(){
 }
 
 login(value){
-this.auth.login(value.email,value.password).then(result=>{
+this.auth.login(value.email, value.password).then(result => {
   this.userService.save(result.user);
-  this.router.navigate(['/'])
-}).catch(error=>this.errorMess=error)
+  this.router.navigate(['/']);
+}).catch(error => this.errorMess = error);
 }
 
 

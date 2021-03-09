@@ -42,16 +42,29 @@
     <div class="form-group col-md-6">
       <label class="control-label"><span class="required">*</span>  صورة المنتج </label>
       <br>
+
+      <div class="container" *ngIf="100 > progress" style="margin-bottom: 10px;">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar"
+          [style.width.%]="progress" ></div>
+        </div>
+      </div>
+
       <ng-container *ngIf="link">
-      <a [href]="link" target="_blank"> عرض الصورة </a> 
-      |  
+        <div>
+          <img [src]="link" class="img" >
+        </div>
+       |   
       <label class="control-label">اختيار صورة جديدة</label>
     </ng-container>
-       <input type="file" class="form-control-file" (change)="onFileSelected($event)" formControlName="imageUrl">
+    <a>
+      <input type="file" class="form-control-file" (change)="onFileSelected($event)" >
+    </a>   
     </div>
-    <div class="footer" style="width:70% ;">
-    <hr/>
-    <button type="submit" [disabled]="itemForm.invalid"  class="btn btn-primary" >حفظ </button>
+   
+    <div class="footer" style="width:90%;">
+      <hr/>
+    <button type="submit" [disabled]="itemForm.invalid || !link || 100 > progress"  class="btn btn-primary" >حفظ </button>
     </div>
   </div>
    </form>

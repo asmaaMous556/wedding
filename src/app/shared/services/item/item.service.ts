@@ -8,9 +8,9 @@ import { Injectable } from '@angular/core';
 })
 export class ItemService {
 
-  constructor(private db : AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) { }
 
-  addItem(item:item){
+  addItem(item: item){
     return this.db.list('/items/').push(item);
   }
 
@@ -18,15 +18,15 @@ export class ItemService {
     return this.db.list('/items/').snapshotChanges();
   }
 
-  getItemById(key:string){
-    return this.db.object('/items/'+key).snapshotChanges();
+  getItemById(key: string){
+    return this.db.object('/items/' + key).snapshotChanges();
   }
 
   deleteItem(key){
-   return this.db.object('/items/'+ key).remove();
+   return this.db.object('/items/' + key).remove();
   }
 
-  updateItem(item:item,key:string){
-    return this.db.object('/items/'+ key).update(item)
+  updateItem(item: item, key: string){
+    return this.db.object('/items/' + key).update(item);
   }
 }

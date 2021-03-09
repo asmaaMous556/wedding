@@ -9,25 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about-us.component.css']
 })
 export class AboutUsComponent implements OnInit {
-aboutUsForm:FormGroup
-text:any;
-  constructor(private aboutUsService:AboutUsService, private fb :FormBuilder) { }
+aboutUsForm: FormGroup;
+text: any;
+  constructor(private aboutUsService: AboutUsService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
 
-    this.aboutUsService.getText().subscribe(text=>{
-      this.text=text;
+    this.aboutUsService.getText().subscribe(text => {
+      this.text = text;
       console.log(this.text);
-      if(this.text){
+      if (this.text){
         this.aboutUsForm.patchValue({
-          aboutUsText :this.text.aboutUsText
-        })
+          aboutUsText : this.text.aboutUsText
+        });
       }
-    })
-    
- this.aboutUsForm=this.fb.group({
-   aboutUsText:['',[Validators.required]]
- })
+    });
+
+    this.aboutUsForm = this.fb.group({
+   aboutUsText: ['', [Validators.required]]
+ });
 }
 
 setText(text){

@@ -9,21 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComplainsComponent implements OnInit {
 
-  complains:complain[]
-  constructor(private complainService:CompalinService) { }
+  complains: complain[];
+  constructor(private complainService: CompalinService) { }
 
   ngOnInit(): void {
-    this.complainService.getAllComplains().subscribe(complains=>{
-      this.complains=complains.map(complain=>{
+    this.complainService.getAllComplains().subscribe(complains => {
+      this.complains = complains.map(complain => {
         return{
-          key:complain.key,
-          name:complain.payload.val()['name'],
-          email:complain.payload.val()['email'],
-          message:complain.payload.val()['message']
-        }
-      })
-      
-    })
+          key: complain.key,
+          name: complain.payload.val()['name'],
+          email: complain.payload.val()['email'],
+          message: complain.payload.val()['message']
+        };
+      });
+
+    });
   }
 
 }

@@ -6,15 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  user$: Observable< firebase.default.User>
-  constructor(private fauth:AngularFireAuth) {
-    this.user$=this.fauth.user
+  user$: Observable< firebase.default.User>;
+  constructor(private fauth: AngularFireAuth) {
+    this.user$ = this.fauth.user;
    }
-  
-  login(email:string,password:string){
-    return this.fauth.signInWithEmailAndPassword(email,password)
+
+  login(email: string, password: string){
+    return this.fauth.signInWithEmailAndPassword(email, password);
    }
-   
+
    logout(){
     return  this.fauth.signOut();
    }

@@ -13,40 +13,41 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./companies.component.css']
 })
 export class CompaniesComponent implements OnInit {
-companies:company[];
+companies: company[];
 
-  constructor(private companyService:CompaniesService, private fb:FormBuilder) { }
+  constructor(private companyService: CompaniesService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
- this.companyService.getCompany().subscribe(companies=>{
-   this.companies=companies.map(company=>{
+ this.companyService.getCompany().subscribe(companies => {
+   this.companies = companies.map(company => {
      return {
-       key:company.key,
-       titleAr:company.payload.val()['titleAr'],
-       titleEn:company.payload.val()['titleEn'],
-       description:company.payload.val()['description'],
-       phoneNum:company.payload.val()['phoneNum'],
-       address:company.payload.val()['address'],
-       imageUrl:company.payload.val()['imageUrl'],
-       servicesKey:company.payload.val()['servicesKey'],
+       key: company.key,
+       titleAr: company.payload.val()['titleAr'],
+       titleEn: company.payload.val()['titleEn'],
+       descriptionAr: company.payload.val()['descriptionAr'],
+       descriptionEn: company.payload.val()['descriptionEn'],
+       phoneNum: company.payload.val()['phoneNum'],
+       address: company.payload.val()['address'],
+       imageUrl: company.payload.val()['imageUrl'],
+       servicesKey: company.payload.val()['servicesKey'],
+       coverImageUrl: company.payload.val()['coverImageUrl']
+     };
+   });
+ });
 
-     }
-   })
- })
 
- 
-   
+
 }
 
 delete(key){
-  if(!confirm('حذف الشركة؟')) return ;
+  if (!confirm('حذف الشركة؟')) { return ; }
   {
     this.companyService.deleteCom(key);
   }
-  
+
 }
 
 
 
-  
+
 }

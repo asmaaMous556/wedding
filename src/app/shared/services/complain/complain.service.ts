@@ -6,9 +6,9 @@ import { Injectable } from '@angular/core';
 })
 export class CompalinService {
 
-  constructor( private db:AngularFireDatabase) { }
+  constructor( private db: AngularFireDatabase) { }
 
-  
+
   getAllComplains(){
     return this.db.list('/complains/').snapshotChanges();
   }

@@ -8,25 +8,25 @@ import { AngularFireDatabase } from '@angular/fire/database';
 })
 export class DepartmentsService {
 
-  constructor(private db:AngularFireDatabase, private storage :AngularFireStorage) { }
+  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
 
-  addDepartment(department:department){
-  return   this.db.list<department>('departments/').push(department)
+  addDepartment(department: department){
+  return   this.db.list<department>('departments/').push(department);
   }
   getDepartment(){
     return this.db.list('departments/').snapshotChanges();
   }
 
-  updateDept(deptId:string, dept:department){
-return this.db.object('/departments/'+deptId).update(dept);
+  updateDept(deptId: string, dept: department){
+return this.db.object('/departments/' + deptId).update(dept);
   }
 
-  deleteDept(deptId:string){
-    return this.db.object('/departments/'+deptId).remove();
+  deleteDept(deptId: string){
+    return this.db.object('/departments/' + deptId).remove();
   }
 
-  getDeptById(key:string){
-    return this.db.object('/departments/'+key).snapshotChanges();
+  getDeptById(key: string){
+    return this.db.object('/departments/' + key).snapshotChanges();
   }
- 
+
 }

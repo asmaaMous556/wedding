@@ -8,9 +8,9 @@ import { contactUs } from '../../models/contactUs';
 })
 export class ContactUsService {
 
-  constructor(private db :AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) { }
 
-  getContactUsForm():Observable<contactUs>{
+  getContactUsForm(): Observable<contactUs>{
     return this.db.object<contactUs>('contactUs').valueChanges();
 
   }

@@ -10,31 +10,31 @@ import { item } from 'src/app/shared/models/items';
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
-items:item[];
-  constructor(private itemService:ItemService) { }
+items: item[];
+  constructor(private itemService: ItemService) { }
 
   ngOnInit(): void {
-    this.itemService.getItems().subscribe(items=>{
-      this.items=items.map(item=>{
+    this.itemService.getItems().subscribe(items => {
+      this.items = items.map(item => {
         return{
-          key:item.key,
-          companyKey:item.payload.val()['companyKey'],
-          titleAr:item.payload.val()['titleAr'],
-          titleEn:item.payload.val()['titleEn'],
-          info:item.payload.val()['info'],
-          imageUrl:item.payload.val()['imageUrl'],
-          price:item.payload.val()['price']
-          
-        }
-      })
-    })
+          key: item.key,
+          companyKey: item.payload.val()['companyKey'],
+          titleAr: item.payload.val()['titleAr'],
+          titleEn: item.payload.val()['titleEn'],
+          info: item.payload.val()['info'],
+          imageUrl: item.payload.val()['imageUrl'],
+          price: item.payload.val()['price']
+
+        };
+      });
+    });
 
   }
 
-  
+
   delete(key){
- 
-    if(!confirm('حذف الشركة؟')) return ;
+
+    if (!confirm('حذف الشركة؟')) { return ; }
     {
       this.itemService.deleteItem(key);
     }

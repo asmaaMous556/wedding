@@ -1,9 +1,9 @@
-import { service } from "./services";
+import { service } from './services';
 
 export interface department{
-    key:string,
-    titleAr:string,
-    titleEn?:string,
-    imageUrl:string,
-    
+    key: string;
+    titleAr: string;
+    titleEn?: string;
+    imageUrl: string;
+
 }

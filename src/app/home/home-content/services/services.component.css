@@ -15,10 +15,6 @@
     width: 120px;
     object-fit: cover;
 }
-.table{
-    margin-right: 10px;
-    width:90%;
-}
 
 .option{
     font-size:14px;
@@ -28,4 +24,18 @@
     margin-top: 20px;
     margin-bottom: 20px;
 
+}
+.card{
+    margin-top:70px;
+}
+.card-header{
+border:none;
+background-color: white;
+}
+.card-toolbar{
+    justify-content: center;
+}
+.table{
+    margin-left: 200px;
+    width:120%
 }

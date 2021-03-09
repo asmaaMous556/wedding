@@ -13,33 +13,33 @@ import { department } from 'src/app/shared/models/departments';
 })
 export class ServicesComponent implements OnInit {
 
-services:service[];
- 
-  
-  constructor(private service :ServicesService) { }
+services: service[];
+
+
+  constructor(private service: ServicesService) { }
   ngOnInit(): void {
-    this.service.getServices().subscribe(services=>{
-      this.services=services.map(service=>{
+    this.service.getServices().subscribe(services => {
+      this.services = services.map(service => {
         return{
-          key:service.key,
-          titleAr:service.payload.val()['titleAr'],
-          titleEn:service.payload.val()['titleEn'],
-          imageUrl:service.payload.val()['imageUrl'],
-          departmentsKey:service.payload.val()[' departmentTitleAr'],
- 
-        }
-      })
-    })
+          key: service.key,
+          titleAr: service.payload.val()['titleAr'],
+          titleEn: service.payload.val()['titleEn'],
+          imageUrl: service.payload.val()['imageUrl'],
+          departmentsKey: service.payload.val()[' departmentTitleAr'],
+
+        };
+      });
+    });
   }
 
 
 
-  delete (key){
-    if (!confirm('حذف الخدمة؟')) return ;
+  delete(key){
+    if (!confirm('حذف الخدمة؟')) { return ; }
     {
       this.service.deleteService(key);
     }
-  
+
 
   }
 }

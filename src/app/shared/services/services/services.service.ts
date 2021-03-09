@@ -9,21 +9,21 @@ export class ServicesService {
 
   constructor(private db: AngularFireDatabase) { }
 
-  addService(service:service){
+  addService(service: service){
     return this.db.list('/services').push(service);
   }
   getServices(){
-    return this.db.list('/services').snapshotChanges();
+    return this.db.list<service[]>('/services').snapshotChanges();
   }
 
-  updateService(serviceId:string, service:service){
-  return this.db.object('/services/'+serviceId).update(service)
+  updateService(serviceId: string, service: service){
+  return this.db.object('/services/' + serviceId).update(service);
   }
-  deleteService (serviceId:string){
-    return this.db.object('/services/'+serviceId).remove();
+  deleteService(serviceId: string){
+    return this.db.object('/services/' + serviceId).remove();
   }
 
-  getServiceById(serviceId:string){
-    return this.db.object('/services/'+serviceId).snapshotChanges();
+  getServiceById(serviceId: string){
+    return this.db.object('/services/' + serviceId).snapshotChanges();
   }
 }

@@ -1,3 +1,3 @@
 export interface aboutUs{
-    aboutUs:string;
+    aboutUs: string;
 }

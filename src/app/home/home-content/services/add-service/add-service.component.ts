@@ -1,6 +1,7 @@
+import { UploadingService } from './../../../../shared/services/uploading/uploading.service';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { service } from './../../../../shared/models/services';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -8,6 +9,7 @@ import { department } from 'src/app/shared/models/departments';
 import { DepartmentsService } from 'src/app/shared/services/departments/departments.service';
 import { ServicesService } from 'src/app/shared/services/services/services.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-service',
@@ -17,25 +19,29 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 export class AddServiceComponent implements OnInit {
   departments: department[];
   serviceForm: FormGroup;
-  serviceKey:string;
-  service:any;
-  link:string;
-  downloadUrl:any;
-  isLink:boolean=false;
-  dropdownSettings:IDropdownSettings={};
-  constructor(private fb:FormBuilder,
-    private deptService:DepartmentsService,
-    private serviceService:ServicesService,
-    private route:ActivatedRoute, private storage :AngularFireStorage) { }
+  serviceKey: string;
+  service: any;
+  link: string;
+  downloadUrl: any;
+  isLink = false;
+  progress:number;
+  dropdownSettings: IDropdownSettings = {};
+  constructor(private fb: FormBuilder,
+              private deptService: DepartmentsService,
+              private serviceService: ServicesService,
+              private route: ActivatedRoute,
+               private storage: UploadingService,
+               private router:Router
+               ) { }
 
   ngOnInit(): void {
-    this.serviceForm=this.fb.group({
-      titleAr:['',[Validators.required]],
-      titleEn:[''],
-      imageUrl:[''],
-      departmentsKey:['',[Validators.required]],
+    this.serviceForm = this.fb.group({
+      titleAr: ['', [Validators.required]],
+      titleEn: ['', [Validators.required]],
+      imageUrl: [''],
+      departmentsKey: ['', [Validators.required]],
          });
-         this.dropdownSettings = {
+    this.dropdownSettings = {
           singleSelection: false,
           idField: 'key',
           textField: 'titleAr',
@@ -44,77 +50,78 @@ export class AddServiceComponent implements OnInit {
           allowSearchFilter: true
         };
 
-   this.deptService.getDepartment().subscribe(departments=>{
-    this.departments=departments.map(department=>{
+    this.deptService.getDepartment().subscribe(departments => {
+    this.departments = departments.map(department => {
       return {
-        key:department.key,
-        titleAr:department.payload.val()['titleAr'],
-        imageUrl:department.payload.val()['imageUrl']
-      }
-    })
+        key: department.key,
+        titleAr: department.payload.val()['titleAr'],
+        titleEn:department.payload.val()['titleEn'],
+        imageUrl: department.payload.val()['imageUrl']
+      };
+    });
    });
-   this.route.queryParams.subscribe(key=>{
-    this.serviceKey=key['id'];
-    console.log(this.serviceKey)
+    this.route.queryParams.subscribe(key => {
+    this.serviceKey = key.id;
   });
-   if(this.serviceKey){
-     this.serviceService.getServiceById(this.serviceKey).subscribe(service=>{
-       this.service=service.payload.val()
+    if (this.serviceKey){
+     this.serviceService.getServiceById(this.serviceKey).subscribe(service => {
+       this.service = service.payload.val();
        this.serviceForm.patchValue({
          titleAr: this.service.titleAr,
-         titleEn:this.service.titleEn,
-         departmentsKey:this.service.departmentsKey
-       })
-       if(this.service.imageUrl)
+         titleEn: this.service.titleEn,
+         departmentsKey: this.service.departmentsKey
+       });
+       if (this.service.imageUrl)
        {
-       this.link=this.service.imageUrl
-        console.log(this.link);
-           if(this.link){
-              this.isLink =true;
+       this.link = this.service.imageUrl;
+       console.log(this.link);
+       if (this.link){
+              this.isLink = true;
              }
         }
-     })
-   
+     });
+
    }
-  
+
 }
-  
- async addService(service:service){
-     await (service.imageUrl=this.link);
-    console.log(this.link)
-    if(this.serviceKey){
-      this.serviceService.updateService(this.serviceKey,service)
+
+ async addService(service: service){
+     await (service.imageUrl = this.link);
+     console.log(this.link);
+     if (this.serviceKey){
+      this.serviceService.updateService(this.serviceKey, service);
     }
     else{
       this.serviceService.addService(service);
     }
-    this.serviceForm.reset();
-   
+     if(confirm('تم حفظ البيانات')){
+      this.serviceForm.reset();
+      this.router.navigate(['/services'])
+     }
   }
 
 
   onFileSelected(event){
-    var  date= Date.now()
-     const file = event.target.files[0];
-     const filePath = `/serviceImages/${date}`;
-     const fileRef = this.storage.ref(filePath);
-     const task = this.storage.upload(`/serviceImages/${date}`, file);
-      task.snapshotChanges().pipe(
-       finalize(() => {
-         this.downloadUrl = fileRef.getDownloadURL();
-         this.downloadUrl.subscribe(url => {
-           if (url) {
-             this.link = url;
-             console.log(this.link);
-           }
-           
-         });
-       })
-     )
-     .subscribe(url => {
-       if (url) {
-       }
-     });
+
+ let n = Date.now();
+const file = event.target.files[0];
+const filePath = `/servicesImages/${n}`;
+this.storage.getProgress(filePath,file).subscribe(progress=>{
+  this.progress=progress;
+})
+this.storage.uploadImg(filePath, file).pipe(
+  finalize(() => {
+     this.storage.fileRef(filePath).getDownloadURL()
+    .subscribe(url => {
+      if (url) {
+        this.link = url;
+        console.log(this.link)
+      }
+    });
+  })).subscribe(url=>{
+    if(url){}
+  })
+
 }
 
 
