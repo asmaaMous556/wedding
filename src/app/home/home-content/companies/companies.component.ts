@@ -3,9 +3,10 @@ import { CompaniesService } from './../../../shared/services/company/companies.s
 import { service } from './../../../shared/models/services';
 import { ServicesService } from './../../../shared/services/services/services.service';
 import { company } from './../../../shared/models/companies';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-companies',
@@ -14,7 +15,8 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CompaniesComponent implements OnInit {
 companies: company[];
-
+input= new FormControl();
+filteredCompanies: company[];
   constructor(private companyService: CompaniesService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -33,8 +35,19 @@ companies: company[];
        coverImageUrl: company.payload.val()['coverImageUrl']
      };
    });
+   this.filteredCompanies=this.companies;
  });
 
+ this.input.valueChanges.pipe(debounceTime(300)).subscribe(value=>{
+  if(value){
+   return this.filteredCompanies= this.companies.filter(item=>{
+       return (item.titleAr.includes(value) || item.address.includes(value));
+          })
+     }
+     else{
+    return  this.filteredCompanies=this.companies;  
+    }
+})
 
 
 }

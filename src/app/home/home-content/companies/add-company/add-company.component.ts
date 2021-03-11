@@ -2,20 +2,21 @@ import { UploadingService } from './../../../../shared/services/uploading/upload
 import { AngularFireStorage } from '@angular/fire/storage';
 import { company } from './../../../../shared/models/companies';
 import { service } from './../../../../shared/models/services';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CompaniesService } from 'src/app/shared/services/company/companies.service';
 import { ServicesService } from 'src/app/shared/services/services/services.service';
 import { finalize } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-company',
   templateUrl: './add-company.component.html',
   styleUrls: ['./add-company.component.css']
 })
-export class AddCompanyComponent implements OnInit {
+export class AddCompanyComponent implements OnInit, OnDestroy {
  downloadUrl: any;
   services: service[];
   companyForm: FormGroup;
@@ -28,14 +29,15 @@ export class AddCompanyComponent implements OnInit {
   imgProgress:any;
   coverProgress:any;
   dropdownSettings: IDropdownSettings = {};
-
+  imageUrlSub:Subscription;
+  coverUrlSub:Subscription;
   constructor(private fb: FormBuilder ,
               private service: ServicesService,
               private companyService: CompaniesService,
               private storage: UploadingService,
               private route: ActivatedRoute,
-              private router :Router
-              ) { }
+              private router :Router) { }
+  
 
   ngOnInit(): void {
     this.companyForm = this.fb.group({
@@ -91,8 +93,6 @@ export class AddCompanyComponent implements OnInit {
          {
         this.imgLink = this.company.imageUrl;
         this.coverLink=this.company.coverImageUrl
-        console.log(this.imgLink);
-        console.log(this.coverLink);
        if (this.imgLink){
            this.isImgLink = true;
              }
@@ -104,20 +104,18 @@ export class AddCompanyComponent implements OnInit {
 
   async addCompany(company: company)
   {
-  await(company.imageUrl=this.imgLink)  
-    company.coverImageUrl=this.coverLink;
-     console.log(this.coverLink);
+   await(company.imageUrl=this.imgLink)  
+    await (company.coverImageUrl=this.coverLink)
   if (this.compKey){
       this.companyService.updateCompany(this.compKey, company);
       }
       else{
         this.companyService.addCompany(company);
       }
-     this.companyForm.reset();
     if(confirm('تم حفظ البيانات')){
       this.companyForm.reset();
      }
-    this.router.navigate(['/companies'])
+   // this.router.navigate(['/companies'])
   }
 
  onImageSelected(event){
@@ -127,7 +125,7 @@ export class AddCompanyComponent implements OnInit {
   this.storage.getProgress(filePath,file).subscribe(imgProgress=>{
   this.imgProgress=imgProgress;
   })
-  this.storage.uploadImg(filePath, file).pipe(
+ this.imageUrlSub= this.storage.uploadImg(filePath, file).pipe(
   finalize(() => {
      this.storage.fileRef(filePath).getDownloadURL()
     .subscribe(url => {
@@ -139,14 +137,8 @@ export class AddCompanyComponent implements OnInit {
   })).subscribe(url=>{
     if(url){}
   })
-  
 }
-
  
-
-
-
-
  onCoverSelected(event){
   let n = Date.now();
   const file = event.target.files[0];
@@ -154,7 +146,7 @@ export class AddCompanyComponent implements OnInit {
   this.storage.getProgress(filePath,file).subscribe(coverProgress=>{
   this.coverProgress=coverProgress;
   })
-  this.storage.uploadImg(filePath, file).pipe(
+ this.coverUrlSub= this.storage.uploadImg(filePath, file).pipe(
   finalize(() => {
      this.storage.fileRef(filePath).getDownloadURL()
     .subscribe(url => {
@@ -168,5 +160,11 @@ export class AddCompanyComponent implements OnInit {
   })
   
  }
+
+ ngOnDestroy(): void {
+  this.imageUrlSub.unsubscribe();
+  this.coverUrlSub.unsubscribe();
+}
+ 
 }
 

@@ -1,20 +1,24 @@
 import { contactUs } from './../../../shared/models/contactUs';
 import { ContactUsService } from './../../../shared/services/contactUs.ts/contact-us.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.css']
 })
-export class ContactUsComponent implements OnInit {
+export class ContactUsComponent implements OnInit,OnDestroy {
 contactUsForm: FormGroup;
 form: contactUs;
+contactSubscription: Subscription;
   constructor(private fb: FormBuilder, private contactUsService: ContactUsService) { }
+  
+ 
 
   ngOnInit(): void {
-    this.contactUsService.getContactUsForm().subscribe(form => {
+   this.contactSubscription= this.contactUsService.getContactUsForm().subscribe(form => {
       this.form = form;
       console.log(this.form);
       if (this.form){
@@ -45,6 +49,11 @@ form: contactUs;
 
   updateLinks(linksForm){
   this.contactUsService.setContactUsForm(linksForm);
+  confirm('تم حفظ البيانات');
+  }
+
+  ngOnDestroy(): void {
+    this.contactSubscription.unsubscribe();
   }
 
 }

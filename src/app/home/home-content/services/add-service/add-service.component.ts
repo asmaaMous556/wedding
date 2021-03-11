@@ -3,20 +3,20 @@ import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ActivatedRoute, Router } from '@angular/router';
 import { service } from './../../../../shared/models/services';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { department } from 'src/app/shared/models/departments';
 import { DepartmentsService } from 'src/app/shared/services/departments/departments.service';
 import { ServicesService } from 'src/app/shared/services/services/services.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-service',
   templateUrl: './add-service.component.html',
   styleUrls: ['./add-service.component.css']
 })
-export class AddServiceComponent implements OnInit {
+export class AddServiceComponent implements OnInit ,OnDestroy {
   departments: department[];
   serviceForm: FormGroup;
   serviceKey: string;
@@ -26,13 +26,15 @@ export class AddServiceComponent implements OnInit {
   isLink = false;
   progress:number;
   dropdownSettings: IDropdownSettings = {};
+  imgUrlSub:Subscription;
+  progressSub:Subscription
   constructor(private fb: FormBuilder,
               private deptService: DepartmentsService,
               private serviceService: ServicesService,
               private route: ActivatedRoute,
                private storage: UploadingService,
-               private router:Router
-               ) { }
+               private router:Router) { }
+  
 
   ngOnInit(): void {
     this.serviceForm = this.fb.group({
@@ -74,7 +76,6 @@ export class AddServiceComponent implements OnInit {
        if (this.service.imageUrl)
        {
        this.link = this.service.imageUrl;
-       console.log(this.link);
        if (this.link){
               this.isLink = true;
              }
@@ -96,7 +97,7 @@ export class AddServiceComponent implements OnInit {
     }
      if(confirm('تم حفظ البيانات')){
       this.serviceForm.reset();
-      this.router.navigate(['/services'])
+     
      }
   }
 
@@ -106,16 +107,16 @@ export class AddServiceComponent implements OnInit {
  let n = Date.now();
 const file = event.target.files[0];
 const filePath = `/servicesImages/${n}`;
-this.storage.getProgress(filePath,file).subscribe(progress=>{
+this.progressSub=this.storage.getProgress(filePath,file).subscribe(progress=>{
   this.progress=progress;
-})
-this.storage.uploadImg(filePath, file).pipe(
+});
+ this.imgUrlSub=this.storage.uploadImg(filePath, file).pipe(
   finalize(() => {
      this.storage.fileRef(filePath).getDownloadURL()
     .subscribe(url => {
       if (url) {
         this.link = url;
-        console.log(this.link)
+        
       }
     });
   })).subscribe(url=>{
@@ -124,5 +125,9 @@ this.storage.uploadImg(filePath, file).pipe(
 
 }
 
+ngOnDestroy(): void {
+  this.imgUrlSub.unsubscribe();
+  this.progressSub.unsubscribe();
+}
 
 }

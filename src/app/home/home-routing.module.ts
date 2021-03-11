@@ -13,7 +13,7 @@ import { CompaniesComponent } from './home-content/companies/companies.component
 import { ServicesComponent } from './home-content/services/services.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ChildrenOutletContexts } from '@angular/router';
-import { AddDepartmentComponent } from './home-content/main-departments/add-department/add-department.component';
+import { AddDepartmentComponent } from "./home-content/main-departments/add-department/add-departmentComponent";
 
 
 const routes: Routes = [

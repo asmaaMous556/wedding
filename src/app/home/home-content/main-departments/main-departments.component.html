@@ -4,6 +4,11 @@
     <div class="card-title">
     <h3 style="margin-left: 20%;">الاقسام الرئيسية</h3>
       </div>
+    <div class="container">
+      <div class="input-group rounded">
+        <input type="search"  [formControl]="input" class="form-control rounded" placeholder="ابحث" aria-label="Search"
+          aria-describedby="search-addon" style="max-width: 300px;" />
+    </div>
   </div>
       
   <div class="card-body">
@@ -20,7 +25,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let dept of departments ; let i = index">
+      <tr *ngFor="let dept of filteredDepts ; let i = index">
         <th>{{i+1}}</th>
         <td>{{dept.titleAr}}</td>
         <td>{{dept.titleEn}}</td>

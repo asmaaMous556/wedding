@@ -1,15 +1,13 @@
 import { UploadingService } from './../../../../shared/services/uploading/uploading.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { item } from './../../../../shared/models/items';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { ItemService } from './../../../../shared/services/item/item.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { company } from './../../../../shared/models/companies';
 import { CompaniesService } from './../../../../shared/services/company/companies.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { finalize } from 'rxjs/operators';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -17,7 +15,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
   templateUrl: './add-item.component.html',
   styleUrls: ['./add-item.component.css']
 })
-export class AddItemComponent implements OnInit {
+export class AddItemComponent implements OnInit ,OnDestroy{
 
  companies: company[];
  itemForm: FormGroup;
@@ -28,11 +26,13 @@ export class AddItemComponent implements OnInit {
  item: any;
  loading:boolean=false;
  progress:any;
+ imgUrlSub:Subscription;
+ progressSub:Subscription
   constructor(
      private companyService: CompaniesService,
      private fb: FormBuilder, private ItemService: ItemService,
-     private storage: UploadingService, private route: ActivatedRoute,
-     private router:Router) { }
+     private storage: UploadingService, private route: ActivatedRoute) { }
+  
 
   ngOnInit(): void {
     this.companyService.getCompany().subscribe(companies => {
@@ -106,12 +106,12 @@ export class AddItemComponent implements OnInit {
     let n = Date.now();
 const file = event.target.files[0];
 const filePath = `/itemsImages/${n}`;
-this.storage.getProgress(filePath,file).subscribe(progress=>{
+this.progressSub=this.storage.getProgress(filePath,file).subscribe(progress=>{
   this.progress=progress;
 })
-this.storage.uploadImg(filePath, file).pipe(
+this.imgUrlSub= this.storage.uploadImg(filePath, file).pipe(
   finalize(() => {
-     this.storage.fileRef(filePath).getDownloadURL()
+   this.storage.fileRef(filePath).getDownloadURL()
     .subscribe(url => {
       if (url) {
         this.link = url;
@@ -121,6 +121,11 @@ this.storage.uploadImg(filePath, file).pipe(
   })).subscribe(url=>{
     if(url){}
   })
+}
+ngOnDestroy(): void {
+   this.imgUrlSub.unsubscribe();
+   this.imgUrlSub.unsubscribe();
+
 }
 
 }

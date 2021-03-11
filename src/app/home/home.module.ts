@@ -9,9 +9,9 @@ import { ServicesComponent } from './home-content/services/services.component';
 import { CompaniesComponent } from './home-content/companies/companies.component';
 import { LoginComponent } from './home-content/login/login.component';
 import { HeaderComponent } from './home-layout/header/header.component';
-import { AddDepartmentComponent } from './home-content/main-departments/add-department/add-department.component';
+import { AddDepartmentComponent } from "./home-content/main-departments/add-department/add-departmentComponent";
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SideNavbarComponent } from './home-layout/side-navbar/side-navbar.component';
 import { AddCompanyComponent } from './home-content/companies/add-company/add-company.component';
 import { AddServiceComponent } from './home-content/services/add-service/add-service.component';
@@ -43,6 +43,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     CommonModule,
     HomeRoutingModule,
     NzModalModule,
+    FormsModule,
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot()
    
