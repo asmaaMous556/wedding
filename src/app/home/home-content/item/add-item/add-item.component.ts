@@ -123,8 +123,11 @@ this.imgUrlSub= this.storage.uploadImg(filePath, file).pipe(
   })
 }
 ngOnDestroy(): void {
-   this.imgUrlSub.unsubscribe();
-   this.imgUrlSub.unsubscribe();
+  if(this.imgUrlSub && this.progressSub){
+    this.imgUrlSub.unsubscribe();
+    this.progressSub.unsubscribe();
+  }
+  
 
 }
 

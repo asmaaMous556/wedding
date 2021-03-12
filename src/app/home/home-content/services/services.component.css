@@ -21,8 +21,9 @@
 }
 .btn-primary{
     margin-left: 85%;
-    margin-top: 20px;
     margin-bottom: 20px;
+    width: 120px;
+    margin-top: 1px;
 
 }
 .card{
@@ -37,5 +38,5 @@ background-color: white;
 }
 .table{
     margin-left: 200px;
-    width:120%
+    width:100%
 }

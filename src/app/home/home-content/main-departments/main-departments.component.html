@@ -1,40 +1,47 @@
 <div class="container">
   <div class="card">
   <div class="card-header ">
-    <div class="card-title">
-    <h3 style="margin-left: 20%;">الاقسام الرئيسية</h3>
-      </div>
     <div class="container">
-      <div class="input-group rounded">
-        <input type="search"  [formControl]="input" class="form-control rounded" placeholder="ابحث" aria-label="Search"
-          aria-describedby="search-addon" style="max-width: 300px;" />
+      <div class="row">
+        <div class="col-6">
+        </div>
+        <div class="col-6">
+          <h4>الاقسام الرئيسية</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group rounded">
+          <input type="search"  [formControl]="input" class="form-control rounded" placeholder="ابحث" aria-label="Search"
+            aria-describedby="search-addon" style="max-width: 300px;" />
+      </div>
+      </div>
     </div>
+  
+  <div class="card-body" style="height: auto;">
+   <div class="row" >
+   <div class="col-9"style="text-align: right; max-width: 100%;" > 
+    <div class="table-responsive-sm">
+    <table class="table table-md dataTable" style="width:90%;">
+      <thead>
+       <tr>
+         <th>#</th>
+         <th>اسم القسم</th>
+         <th>  اسم القسم باللغة الانجليزية </th>
+         <th>خيارات</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let dept of filteredDepts ; let i = index">
+         <th>{{i+1}}</th>
+         <td>{{dept.titleAr}}</td>
+         <td>{{dept.titleEn}}</td>
+         <td>
+           <a class="option" routerLink="/add-dept/" [queryParams]="{id:dept.key}">تعديل </a>
+         </td>
+       </tr>
+     </tbody>
+      </table>
   </div>
-      
-  <div class="card-body">
-   <div class="row" style="margin-top: 24px; margin-right:20px">
-   <div class="col-9" style="text-align: center; margin-right: 50px;">
-      
-      <table class="table table-md dataTable" style="width:90%;">
-     <thead>
-      <tr>
-        <th>#</th>
-        <th>اسم القسم</th>
-        <th>  اسم القسم باللغة الانجليزية </th>
-        <th>خيارات</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let dept of filteredDepts ; let i = index">
-        <th>{{i+1}}</th>
-        <td>{{dept.titleAr}}</td>
-        <td>{{dept.titleEn}}</td>
-        <td>
-          <a class="option" routerLink="/add-dept/" [queryParams]="{id:dept.key}">تعديل </a>
-        </td>
-      </tr>
-    </tbody>
-     </table>
     </div>
    </div>
 </div>

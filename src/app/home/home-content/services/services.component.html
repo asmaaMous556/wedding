@@ -5,47 +5,53 @@
 <div class="container">
   <div class="card">
   <div class="card-header " style="max-height: 150px;">
-    <div class="card-title">
-    <h3>الخدمات </h3>
-    <div class="row d-flex flex-row">
-      <button type="button"  class="btn btn-primary " routerLink="/add-service/"> إضافة خدمة </button>
-    </div>
     <div class="container">
-       <div class="input-group rounded">
-        <input type="search"  [formControl]="input" class="form-control rounded" placeholder="ابحث" aria-label="Search"
-          aria-describedby="search-addon" style="max-width: 300px;" />
-       </div>
-     </div>
+      <div class="row">
+        <div class="col-6">
+          <button type="button"  class="btn btn-primary " routerLink="/add-service/"> إضافة خدمة </button>
+        </div>
+        <div class="col-6">
+          <h3>الخدمات </h3>
+        </div>
+      </div>
+    </div>
+        <div class="row">
+          <div class="input-group rounded">
+            <input type="search"  [formControl]="input" class="form-control rounded" placeholder="ابحث" aria-label="Search"
+              aria-describedby="search-addon" style="max-width: 300px;" />
+        </div> 
+    </div>
   </div>
- </div>
 
-    <div class="card-body">
+    <div class="card-body" style="height: auto;">
     <div class="row" style="margin-top: 24px; margin-right:20px">
-     <table class="table table-md dataTable">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>اسم الخدمة </th>
-          <th> اسم الخدمة باللغة الانجليزية</th>
-          <th>خيارات </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let service of filteredServices; let i = index">
-          <th>{{i+1}}</th>
-          <td>{{service.titleAr}}</td>
-          <td>{{service.titleEn}}</td>
-          <td><a class="option" routerLink="/add-service/" [queryParams]="{id:service.key}">تعديل</a>
-             | 
-            <a (click)="delete(service.key)" class="text-danger option"> حذف </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+   <div class="col-9" style="text-align: right; max-width: 100%;">
+    <div class="table-responsive mb-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>اسم الخدمة </th>
+            <th> اسم الخدمة باللغة الانجليزية</th>
+            <th>خيارات </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let service of filteredServices; let i = index">
+            <th>{{i+1}}</th>
+            <td>{{service.titleAr}}</td>
+            <td>{{service.titleEn}}</td>
+            <td><a class="option" routerLink="/add-service/" [queryParams]="{id:service.key}">تعديل</a>
+               | 
+              <a (click)="delete(service.key)" class="text-danger option"> حذف </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+   </div>
   </div>
-  <div class="card-footer">
-
-  </div>
+  <div class="card-footer"></div>
   </div>
   </div>
 

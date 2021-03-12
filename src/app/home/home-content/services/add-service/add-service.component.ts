@@ -126,8 +126,11 @@ this.progressSub=this.storage.getProgress(filePath,file).subscribe(progress=>{
 }
 
 ngOnDestroy(): void {
-  this.imgUrlSub.unsubscribe();
+  if(this.imgUrlSub && this.progressSub){
+    this.imgUrlSub.unsubscribe();
   this.progressSub.unsubscribe();
+  }
+  
 }
 
 }

@@ -9,7 +9,9 @@
 }
 .btn-primary{
     margin-left: 85%;
-    margin-top: 20px;
+    border-radius: 4px;
+    width: 120px;
+    margin-top: 1px; 
 }
 .card{
     margin-top:70px;
@@ -23,5 +25,5 @@ background-color: white;
 }
 .table{
     margin-left: 200px;
-    width:120%
+    
 }

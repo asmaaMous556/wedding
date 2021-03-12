@@ -162,8 +162,12 @@ export class AddCompanyComponent implements OnInit, OnDestroy {
  }
 
  ngOnDestroy(): void {
-  this.imageUrlSub.unsubscribe();
-  this.coverUrlSub.unsubscribe();
+   if(this.imageUrlSub && this.coverUrlSub){
+    this.imageUrlSub.unsubscribe();
+    this.coverUrlSub.unsubscribe();
+   }
+  
+  
 }
  
 }

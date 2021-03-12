@@ -2,23 +2,28 @@
 <div class="container">
   <div class="card">
   <div class="card-header" style="max-height: 150px;">
-    <div class="card-title">
-    <h3>المنتجات </h3>
-      </div>
-        <div class="row d-flex flex-row">
+    <div class="container">
+      <div class="row align-items-start">
+        <div class="col-6">
           <button type="button"  class="btn btn-primary " routerLink="/add-item/"> إضافة منتج </button>
         </div>
-        <div class="container">
+        <div class="col-6">
+          <h4>المنتجات </h4>
+        </div>
+      </div>
+    </div>
+        <div class="row">
           <div class="input-group rounded">
             <input type="search"  [formControl]="input" class="form-control rounded" placeholder="ابحث" aria-label="Search"
               aria-describedby="search-addon" style="max-width: 300px; margin-top: 20px;" />
-          </div>
+         </div> 
       </div>
   </div> 
   <div class="card-body">
-  <div class="row" style="margin-top: 24px;  margin-right:20px">
-    <div class="col-9" style="text-align: center;">
-         <table class="table table-sm dataTable">
+  <div class="row" >
+    <div class="col-9" style="text-align: right; max-width: 100%;">
+        <div class="table-responsive-sm mb-2">
+          <table class="table ">
             <thead>
               <tr>
                 <th>#</th>
@@ -41,6 +46,7 @@
              </tr>
             </tbody>
           </table>
+        </div>
    </div>
  </div>
  
