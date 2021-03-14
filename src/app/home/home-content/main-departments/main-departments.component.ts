@@ -28,8 +28,6 @@ input=new FormControl();
      });
 
      this.input.valueChanges.pipe(debounceTime(300)).subscribe(value=>{
-      
-      console.log(value);
       if(value){
        return this.filteredDepts= this.departments.filter(dept=>{
            return (dept.titleAr.includes(value) || dept.titleEn.toLowerCase().includes(value));

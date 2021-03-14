@@ -37,10 +37,9 @@ input=new FormControl();
       });
       this.filteredServices=this.services;
     });
+
     this.input.valueChanges.pipe(debounceTime(300)).subscribe(value=>{
-      
-      console.log(value);
-      if(value){
+           if(value){
        return this.filteredServices= this.services.filter(service=>{
            return (service.titleAr.includes(value) || service.titleEn.toLowerCase().includes(value));
               })
