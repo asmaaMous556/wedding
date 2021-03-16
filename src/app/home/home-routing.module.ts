@@ -1,3 +1,4 @@
+import { AuthGuardService } from './../shared/services/guards/auth-guard.service';
 import { ComplainsComponent } from './home-content/complains/complains.component';
 import { AboutUsComponent } from './home-content/about-us/about-us.component';
 import { ContactUsComponent } from './home-content/contact-us/contact-us.component';
@@ -20,18 +21,18 @@ const routes: Routes = [
   {path:'',component:HomeLayoutComponent,
  children : [
     {path:'',component:HomeContentComponent},
-    {path:'departments',component:MainDepartmentsComponent},
-    {path:'add-dept',component:AddDepartmentComponent},
+    {path:'departments',component:MainDepartmentsComponent,canActivate:[AuthGuardService]},
+    {path:'add-dept',component:AddDepartmentComponent,canActivate:[AuthGuardService]},
     {path:'login',component:LoginComponent},
-    { path:'services', component:ServicesComponent},
-    {path:'add-service',component:AddServiceComponent},
-    {path:'companies',component:CompaniesComponent},
-    {path:'add-company',component:AddCompanyComponent},
-    {path:'items', component:ItemComponent},
-    {path:'add-item',component:AddItemComponent},
-    {path:'contactUs',component:ContactUsComponent},
-    {path:'aboutUs',component:AboutUsComponent},
-    {path:'complains',component:ComplainsComponent}
+    { path:'services', component:ServicesComponent,canActivate:[AuthGuardService]},
+    {path:'add-service',component:AddServiceComponent,canActivate:[AuthGuardService]},
+    {path:'companies',component:CompaniesComponent,canActivate:[AuthGuardService]},
+    {path:'add-company',component:AddCompanyComponent,canActivate:[AuthGuardService]},
+    {path:'items', component:ItemComponent,canActivate:[AuthGuardService]},
+    {path:'add-item',component:AddItemComponent,canActivate:[AuthGuardService]},
+    {path:'contactUs',component:ContactUsComponent,canActivate:[AuthGuardService]},
+    {path:'aboutUs',component:AboutUsComponent,canActivate:[AuthGuardService]},
+    {path:'complains',component:ComplainsComponent,canActivate:[AuthGuardService]}
     
   ]
  

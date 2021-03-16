@@ -1,6 +1,6 @@
 
 <div class="container login-container">
-    <div class="alert alert-ganger" *ngIf="errorMess" >{{errorMess}}</div>
+    <div class="alert alert-danger" *ngIf="errorMess" >{{errorMess}}</div>
     <div class="row">
         <div class="col-md-6 login-form-1">
             <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">

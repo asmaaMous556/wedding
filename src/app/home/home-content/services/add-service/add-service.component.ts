@@ -95,11 +95,11 @@ export class AddServiceComponent implements OnInit ,OnDestroy {
     else{
       this.serviceService.addService(service);
     }
-     if(confirm('تم حفظ البيانات')){
+     confirm('تم حفظ البيانات');
       this.serviceForm.reset();
       this.link='';
      
-     }
+     
   }
 
 

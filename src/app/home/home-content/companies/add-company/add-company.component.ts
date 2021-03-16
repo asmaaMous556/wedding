@@ -112,12 +112,10 @@ export class AddCompanyComponent implements OnInit, OnDestroy {
       else{
         this.companyService.addCompany(company);
       }
-    if(confirm('تم حفظ البيانات')){
+    confirm('تم حفظ البيانات');
       this.companyForm.reset();
       this.imgLink='';
       this.coverLink='';
-     }
-   // this.router.navigate(['/companies'])
   }
 
  onImageSelected(event){

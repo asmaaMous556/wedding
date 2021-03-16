@@ -97,10 +97,9 @@ export class AddItemComponent implements OnInit ,OnDestroy{
     console.log(item);
     this.ItemService.addItem(item);
   }
- if(confirm('تم حفظ البيانات')){
+  confirm('تم حفظ البيانات');
   this.itemForm.reset();
-    this.link='';
- }
+  this.link='';
 
 }
 

@@ -71,10 +71,11 @@ export class AddDepartmentComponent implements OnInit, OnDestroy {
     else {
       this.deptService.addDepartment(department);
     }
-    if (confirm('تم حفظ البيانات')) {
+    confirm('تم حفظ البيانات');
       this.deptForm.reset();
+      this.link='';
       // this.router.navigate['/departments'];
-    }
+    
 
   }
 

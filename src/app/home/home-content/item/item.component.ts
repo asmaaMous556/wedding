@@ -48,7 +48,7 @@ filteredItems : item[];
 
   delete(key){
 
-    if (!confirm('حذف الشركة؟')) { return ; }
+    if (!confirm('حذف المنتج؟')) { return ; }
     {
       this.itemService.deleteItem(key);
     }
