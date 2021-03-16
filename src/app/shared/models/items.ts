@@ -5,5 +5,6 @@ export interface item{
     titleEn: string;
     imageUrl: string;
     price: number;
-    info: string;
+    infoAr: string;
+    infoEn:string;
 }

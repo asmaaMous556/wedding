@@ -24,7 +24,8 @@ filteredItems : item[];
           companyKey: item.payload.val()['companyKey'],
           titleAr: item.payload.val()['titleAr'],
           titleEn: item.payload.val()['titleEn'],
-          info: item.payload.val()['info'],
+          infoAr: item.payload.val()['infoAr'],
+          infoEn: item.payload.val()['infoEn'],
           imageUrl: item.payload.val()['imageUrl'],
           price: item.payload.val()['price']
 
@@ -32,18 +33,15 @@ filteredItems : item[];
       })
       this.filteredItems=this.items 
     });
-    this.input.valueChanges.pipe(debounceTime(300)).subscribe(value=>{
-      
-      console.log(value);
-      if(value){
-       return this.filteredItems= this.items.filter(item=>{
-           return (item.titleAr.includes(value) || item.titleEn.toLowerCase().includes(value));
-              })
-         }
-         else{
-        return  this.filteredItems=this.items;  
-        }
-    })
+  this.input.valueChanges.pipe(debounceTime(300)).subscribe(value=>{
+    if(value){
+      return this.filteredItems=this.items.filter(item=>{
+        return (item.titleAr.includes(value) || item.titleEn.toLowerCase().includes(value));
+      })}
+    else{
+      return this.filteredItems=this.items;
+    }
+  })
 
   }
 

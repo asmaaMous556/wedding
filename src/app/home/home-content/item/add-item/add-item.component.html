@@ -24,13 +24,23 @@
     </div>
     </div>
       <div class="form-group col-md-6">
-        <label class="control-label"> <span class="required">*</span>الوصف</label>
+        <label class="control-label"> <span class="required">*</span>وصف المنتج باللغة العربية</label>
            <input type="text" class="form-control" 
-           formControlName="info" required />
-         <div *ngIf="itemForm.get('info').touched && itemForm.get('info').errors?.required" class="text-danger">
+           formControlName="infoAr" required />
+         <div *ngIf="itemForm.get('infoAr').touched && itemForm.get('infoAr').errors?.required" class="text-danger">
            بيان مطلوب
          </div>
     </div>
+
+    <div class="form-group col-md-6">
+      <label class="control-label"> <span class="required">*</span>وصف المنتج باللغة الانجليزية</label>
+         <input type="text" class="form-control" 
+         formControlName="infoEn" required />
+       <div *ngIf="itemForm.get('infoEn').touched && itemForm.get('infoEn').errors?.required" class="text-danger">
+         بيان مطلوب
+       </div>
+  </div>
+
     <div class="form-group col-md-6">
       <label class="control-label"> <span class="required">*</span>السعر </label>
          <input type="text" class="form-control"

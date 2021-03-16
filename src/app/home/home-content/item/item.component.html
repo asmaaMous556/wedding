@@ -28,8 +28,8 @@
               <tr>
                 <th>#</th>
                 <th>اسم المنتج باللغة العربية </th>
+                <th>اسم المنتج باللغة الانجليزية </th>
                 <th> السعر</th>
-                 <th> الوصف</th>
                  <th >خيارات </th>
               </tr>
             </thead>
@@ -37,8 +37,8 @@
              <tr *ngFor="let item of filteredItems ; let i = index  ">
                <th>{{i+1}}</th>
                 <td>{{item.titleAr}}</td>
+                <td>{{item.titleEn}}</td>
                 <td>{{item.price}}</td>
-                 <td>{{item.info}}</td>
                 <td><a class="option" routerLink="/add-item/" [queryParams]="{id:item.key}">تعديل</a>
                     | 
                      <a (click)="delete(item.key)" class="text-danger option">حذف</a>

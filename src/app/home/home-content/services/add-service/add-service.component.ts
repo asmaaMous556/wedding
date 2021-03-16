@@ -97,6 +97,7 @@ export class AddServiceComponent implements OnInit ,OnDestroy {
     }
      if(confirm('تم حفظ البيانات')){
       this.serviceForm.reset();
+      this.link='';
      
      }
   }

@@ -20,7 +20,7 @@ export class AddItemComponent implements OnInit ,OnDestroy{
  companies: company[];
  itemForm: FormGroup;
  downloadUrl: any;
- link: string;
+ link: string='';
  isLink :boolean= false;
  itemKey: string;
  item: any;
@@ -58,7 +58,8 @@ export class AddItemComponent implements OnInit ,OnDestroy{
    imageUrl: [''],
    companyKey: ['', [Validators.required]],
    price: ['', [Validators.required]],
-   info: ['', [Validators.required]]
+   infoAr: ['', [Validators.required]],
+   infoEn: ['', [Validators.required]]
     });
     this.route.queryParams.subscribe(key => {
     this.itemKey = key.id;
@@ -69,7 +70,8 @@ export class AddItemComponent implements OnInit ,OnDestroy{
       this.itemForm.patchValue({
         titleAr: this.item.titleAr,
         titleEn: this.item.titleEn,
-        info: this.item.info,
+        infoAr: this.item.infoAr,
+        infoEn: this.item.infoEn,
         price: this.item.price,
         companyKey: this.item.companyKey
 
@@ -92,10 +94,12 @@ export class AddItemComponent implements OnInit ,OnDestroy{
     this.ItemService.updateItem(item, this.itemKey);
   }
   else{
+    console.log(item);
     this.ItemService.addItem(item);
   }
  if(confirm('تم حفظ البيانات')){
   this.itemForm.reset();
+    this.link='';
  }
 
 }
