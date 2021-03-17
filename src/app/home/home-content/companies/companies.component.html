@@ -28,8 +28,8 @@
             <tr>
               <th>#</th>
               <th>اسم الشركة باللغة العربية </th>
-              <th> العنوان</th>
-               <th>عن الشركة</th>
+              <th>اسم الشركة باللغة الانجليزية</th>
+              <th>العنوان</th>
                <th>خيارات </th>
             </tr>
           </thead>
@@ -37,8 +37,8 @@
            <tr *ngFor="let company of filteredCompanies ; let i = index  ">
              <th>{{i+1}}</th>
               <td>{{company.titleAr}}</td>
+              <td> {{company.titleEn}}</td>
                <td>{{company.address}}</td>
-              <td> {{company.descriptionAr}}</td>
               <td><a class="option" routerLink="/add-company/" [queryParams]="{id:company.key}">تعديل</a>
                   | 
                    <a (click)="delete(company.key)" class="text-danger option">حذف</a>

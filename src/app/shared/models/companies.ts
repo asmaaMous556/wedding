@@ -8,7 +8,8 @@ descriptionAr: string;
 descriptionEn: string;
 phoneNum: string;
 imageUrl: string;
-address: string;
+addressAr: string;
+addressEn: string;
 coverImageUrl?: string;
 servicesKey: string[];
 

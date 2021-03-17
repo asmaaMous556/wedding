@@ -44,7 +44,8 @@ export class AddItemComponent implements OnInit ,OnDestroy{
           descriptionAr: company.payload.val()['descriptionAr'],
           descriptionEn: company.payload.val()['descriptionEn'],
           phoneNum: company.payload.val()['descriptionEn'],
-          address: company.payload.val()['address'],
+          addressAr: company.payload.val()['addressAr'],
+          addressEn: company.payload.val()['addressEn'],
           imageUrl: company.payload.val()['imageUrl'],
           servicesKey: company.payload.val()['servicesKey'],
 

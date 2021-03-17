@@ -29,7 +29,8 @@ filteredCompanies: company[];
        descriptionAr: company.payload.val()['descriptionAr'],
        descriptionEn: company.payload.val()['descriptionEn'],
        phoneNum: company.payload.val()['phoneNum'],
-       address: company.payload.val()['address'],
+       addressAr: company.payload.val()['addressAr'],
+       addressEn: company.payload.val()['addressEn'],
        imageUrl: company.payload.val()['imageUrl'],
        servicesKey: company.payload.val()['servicesKey'],
        coverImageUrl: company.payload.val()['coverImageUrl']
@@ -40,8 +41,8 @@ filteredCompanies: company[];
 
  this.input.valueChanges.pipe(debounceTime(300)).subscribe(value=>{
   if(value){
-   return this.filteredCompanies= this.companies.filter(item=>{
-       return (item.titleAr.includes(value) || item.address.includes(value));
+   return this.filteredCompanies= this.companies.filter(company=>{
+       return (company.titleAr.includes(value) || company.titleEn.toLowerCase().includes(value));
           })
      }
      else{

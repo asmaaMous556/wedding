@@ -42,12 +42,13 @@ export class AddCompanyComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.companyForm = this.fb.group({
       titleAr: ['', [Validators.required]],
-      titleEn: [''],
+      titleEn: ['',[Validators.required]],
       descriptionAr: ['', [Validators.required]],
       descriptionEn: ['', [Validators.required]],
       phoneNum: ['', Validators.required],
       imageUrl: [''],
-      address: ['', Validators.required],
+      addressAr: ['', Validators.required],
+      addressEn: ['', Validators.required],
       coverImageUrl: [''],
       services: ['', Validators.required]
     });
@@ -78,18 +79,20 @@ export class AddCompanyComponent implements OnInit, OnDestroy {
    });
     if (this.compKey){
      this.companyService.getCompById(this.compKey).subscribe(company => {
-       this.company = company.payload.val();
-       console.log(this.company);
-       this.companyForm.patchValue({
-         titleAr: this.company.titleAr,
-         titleEn: this.company.titleEn,
-         descriptionEn: this.company.descriptionEn,
-         descriptionAr: this.company.descriptionAr,
-         phoneNum: this.company.phoneNum,
-         address: this.company.address,
-         services: this.company.services,
-       });
-       if (this.company.imageUrl || this.company.coverImageUrl)
+       if(company){
+        this.company = company.payload.val();
+        this.companyForm.patchValue({
+          titleAr: this.company.titleAr,
+          titleEn: this.company.titleEn,
+          descriptionEn: this.company.descriptionEn,
+          descriptionAr: this.company.descriptionAr,
+          phoneNum: this.company.phoneNum,
+          addressAr: this.company.addressAr,
+          addressEn: this.company.addressEn,
+          services: this.company.services,
+        }); 
+       }
+             if (this.company.imageUrl || this.company.coverImageUrl)
          {
         this.imgLink = this.company.imageUrl;
         this.coverLink=this.company.coverImageUrl

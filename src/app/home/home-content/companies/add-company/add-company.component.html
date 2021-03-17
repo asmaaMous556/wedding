@@ -12,8 +12,11 @@
        </div>
      
        <div class="form-group col-md-6">
-         <label class="control-label">  اسم الشركة (باللغة الإنجليزية)</label>
-         <input type="text" class="form-control" formControlName="titleEn">
+         <label class="control-label required">  اسم الشركة (باللغة الإنجليزية)</label>
+         <input type="text" class="form-control" formControlName="titleEn" required>
+         <div *ngIf="companyForm.get('titleEn').touched &&companyForm.get('titleEn').errors?.required" class="text-danger">
+          بيان مطلوب
+        </div>
        </div>
      
        <div class="form-group col-md-6">
@@ -39,12 +42,19 @@
          </div>
        </div>
        <div class="form-group col-md-6">
-         <label class="control-label required">  العنوان</label>
-         <textarea placeholder=" العنوان" type="text-area" class="form-control" formControlName="address" required></textarea>
-         <div *ngIf="companyForm.get('address').touched &&companyForm.get('address').errors?.required" class="text-danger">
+         <label class="control-label required">  العنوان (باللغة العربية)</label>
+         <textarea placeholder=" العنوان" type="text-area" class="form-control" formControlName="addressAr" required></textarea>
+         <div *ngIf="companyForm.get('addressAr').touched &&companyForm.get('addressAr').errors?.required" class="text-danger">
            بيان مطلوب
          </div>
        </div>
+       <div class="form-group col-md-6">
+        <label class="control-label required"> العنوان (باللغة الانجليزية) </label>
+        <textarea type="text-area" placeholder="Address" placeholder=" العنوان" class="form-control" formControlName="addressEn" required></textarea>
+         <div *ngIf="companyForm.get('addressEn').touched &&companyForm.get('addressEn').errors?.required" class="text-danger">
+          بيان مطلوب
+        </div>
+      </div>
      
       <div class="form-group col-md-6">
           <label class="control-label required"> اختر الخدمات </label>
