@@ -27,6 +27,7 @@ sent :boolean=false;
      .catch(error=>{
      this.error=error
      });
+    this.forgetPassForm.reset();
   }
 
 }
