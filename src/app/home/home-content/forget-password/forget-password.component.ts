@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class ForgetPasswordComponent implements OnInit {
 forgetPassForm:FormGroup;
 error:string;
+sent :boolean=false;
   constructor(private fb : FormBuilder, private auth:AuthService) { }
 
   ngOnInit(): void {
@@ -20,7 +21,10 @@ error:string;
 
   send(form){
     console.log(form.email);
-     this.auth.resetPassword(form.email).catch(error=>{
+     this.auth.resetPassword(form.email).then(result=>{
+       this.sent=true;
+     })
+     .catch(error=>{
      this.error=error
      });
   }
