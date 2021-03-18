@@ -32,3 +32,8 @@
 .row{
     justify-content: center;
 }
+.login-form-1 .ForgetPwd{
+    color: #0062cc;
+    font-weight: 300;
+    text-decoration: none;
+}

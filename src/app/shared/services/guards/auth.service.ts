@@ -18,4 +18,8 @@ export class AuthService {
    logout(){
     return  this.fauth.signOut();
    }
+
+   resetPassword(email){
+     return this.fauth.sendPasswordResetEmail(email);
+   }
 }

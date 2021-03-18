@@ -15,7 +15,12 @@
                     <small *ngIf="password.touched && password.invalid " class="text-danger">ادخل كلمة السر  </small>
                 </div>
 
-               <button type="submit" [disabled]="loginForm.invalid" class="btnSubmit"> Login</button>
+               <div class="form-group">
+                <button type="submit" [disabled]="loginForm.invalid" class="btnSubmit"> تسجيل الدخول</button>
+               </div>
+            <div class="form-group">
+                <a routerLink="/forget-password" class="ForgetPwd">هل نسيت كلمة المرور؟</a>
+            </div>
                    
             </form>
         </div>

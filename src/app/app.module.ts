@@ -2,7 +2,7 @@ import { SelectModule } from 'ng-uikit-pro-standard';
 
 import { environment } from './../environments/environment.prod';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +16,7 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import { ComponentLoaderFactory } from 'ngx-bootstrap/component-loader'; 
 import { PositioningService } from 'ngx-bootstrap/positioning';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 
@@ -38,6 +39,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     ReactiveFormsModule,
     NgbModule,
     ModalModule,
+    AngularFontAwesomeModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireStorageModule,

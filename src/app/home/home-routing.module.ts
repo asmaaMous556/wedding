@@ -1,3 +1,4 @@
+import { ForgetPasswordComponent } from './home-content/forget-password/forget-password.component';
 import { AuthGuardService } from './../shared/services/guards/auth-guard.service';
 import { ComplainsComponent } from './home-content/complains/complains.component';
 import { AboutUsComponent } from './home-content/about-us/about-us.component';
@@ -32,7 +33,8 @@ const routes: Routes = [
     {path:'add-item',component:AddItemComponent,canActivate:[AuthGuardService]},
     {path:'contactUs',component:ContactUsComponent,canActivate:[AuthGuardService]},
     {path:'aboutUs',component:AboutUsComponent,canActivate:[AuthGuardService]},
-    {path:'complains',component:ComplainsComponent,canActivate:[AuthGuardService]}
+    {path:'complains',component:ComplainsComponent,canActivate:[AuthGuardService]},
+    {path:'forget-password',component:ForgetPasswordComponent}
     
   ]
  
