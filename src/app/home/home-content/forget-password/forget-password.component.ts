@@ -20,7 +20,6 @@ sent :boolean=false;
   }
 
   send(form){
-    console.log(form.email);
      this.auth.resetPassword(form.email).then(result=>{
        this.sent=true;
      })

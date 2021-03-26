@@ -16,7 +16,7 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import { ComponentLoaderFactory } from 'ngx-bootstrap/component-loader'; 
 import { PositioningService } from 'ngx-bootstrap/positioning';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 
 
 
@@ -39,7 +39,6 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     ReactiveFormsModule,
     NgbModule,
     ModalModule,
-    AngularFontAwesomeModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireStorageModule,

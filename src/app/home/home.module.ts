@@ -22,6 +22,7 @@ import { AboutUsComponent } from './home-content/about-us/about-us.component';
 import { ComplainsComponent } from './home-content/complains/complains.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ForgetPasswordComponent } from './home-content/forget-password/forget-password.component';
+import {FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [HomeContentComponent,
@@ -47,6 +48,7 @@ import { ForgetPasswordComponent } from './home-content/forget-password/forget-p
     NzModalModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     NgMultiSelectDropDownModule.forRoot()
    
   ]
