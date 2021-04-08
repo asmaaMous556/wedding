@@ -2,6 +2,14 @@
     width: 80%;
     margin-top: 70px;
 }
+.container{
+    margin-top: 20px;
+}
+.btn-outline-light{
+    color:black;
+    border-radius: 0.5px;
+    background-color: lightgray;
+}
 
 
     

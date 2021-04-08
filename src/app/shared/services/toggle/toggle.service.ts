@@ -1,3 +1,4 @@
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -7,12 +8,18 @@ import { BehaviorSubject } from 'rxjs';
 export class ToggleService {
  show :boolean=false;
  visible:BehaviorSubject<boolean>;
-  constructor() {
+  constructor(private db : AngularFireDatabase) {
     this.visible=new BehaviorSubject(this.show);
    }
   
    nextVisible(show){
      this.visible.next(!show);
+   }
+
+   setShow(isHidden:boolean){
+     return this.db.object('/isHidden/').set({
+       isHidden: isHidden
+     })
    }
 
 }

@@ -101,8 +101,11 @@ export class AddDepartmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-     this.imgUrlSub.unsubscribe();
-     this.progressSub.unsubscribe();
+    if(this.imgUrlSub && this.progressSub){
+      this.imgUrlSub.unsubscribe();
+      this.progressSub.unsubscribe();
+    }
+    
   }
 
 }
